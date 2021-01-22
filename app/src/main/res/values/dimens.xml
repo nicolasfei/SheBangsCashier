@@ -1,0 +1,36 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--大模块间隔-->
+    <dimen name="one_layer_nesting_margin">5dp</dimen>
+    <!--大模块里面小模块间隔-->
+    <dimen name="two_layer_nesting_margin">2dp</dimen>
+    <!--组件间间隔-->
+    <dimen name="three_layer_nesting_margin">1dp</dimen>
+    <!--顶部导航栏高度-->
+    <dimen name="action_bar_height">1dp</dimen>
+    <!--textView 图片和文字之间的间隔-->
+    <dimen name="drawable_to_text_margin">10dp</dimen>
+
+    <dimen name="layout_height_percent">0.06</dimen>
+    <dimen name="list_height_percent">0.06</dimen>
+
+    <!--date time picker-->
+    <dimen name="picker_view_height">160dp</dimen>
+    <dimen name="date_unit_text_size">18sp</dimen>
+
+    <!--结算页面-->
+    <dimen name="settlement_lf_margin">20dp</dimen>
+    <dimen name="settlement_msg_margin">10dp</dimen>
+    <dimen name="settlement_list_text">14sp</dimen>
+    <dimen name="settlement_detailed_text">16sp</dimen>
+
+    <dimen name="text_size">12sp</dimen>
+    <dimen name="text_view_margin">5sp</dimen>
+    <dimen name="text_view_item_height">16dp</dimen>
+    <dimen name="drawer_margin">8dp</dimen>
+    <dimen name="drawer_text_size">16sp</dimen>
+    <item name="view_height_percent" type="dimen" format="float">0.05</item>
+</resources>

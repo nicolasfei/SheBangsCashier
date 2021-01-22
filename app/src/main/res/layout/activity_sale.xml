@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/salesperson"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:drawableStart="@drawable/ic_guider"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:drawablePadding="@dimen/drawable_to_text_margin"
+            android:gravity="start|center"
+            android:text="@string/cashier" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/three_layer_nesting_margin"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="15dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/codeInput"
+                style="@style/fragment_cashier_text_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_scanning"
+                android:drawablePadding="@dimen/drawable_to_text_margin"
+                android:focusable="true"
+                android:hint="@string/code"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/oldSale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_translucent_blue"
+                android:text="@string/old_sale" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one_layer_nesting_margin"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="0.1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/goodsCount"
+            style="@style/fragment_cashier_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="数量：0" />
+
+        <View
+            android:layout_width="@dimen/three_layer_nesting_margin"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/priceCount"
+            style="@style/fragment_cashier_text_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="总价合计：0" />
+
+        <View
+            android:layout_width="@dimen/three_layer_nesting_margin"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/settlement"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/shape_rectangle_red"
+            android:text="@string/settlement"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one_layer_nesting_margin"
+        android:background="?android:attr/listDivider" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/sale_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="0.9"
+        android:background="@android:color/white"
+        android:headerDividersEnabled="true" />
+</androidx.appcompat.widget.LinearLayoutCompat>

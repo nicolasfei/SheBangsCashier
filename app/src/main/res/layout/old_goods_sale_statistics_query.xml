@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/goodsClassType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/goodsClassType"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/goodsClassTypeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/vipPhone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/vipPhone"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/vipPhoneClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/receiptCode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/receipt"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/receiptCodeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/payMethod"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/payMethod"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <RadioGroup
+            android:id="@+id/payChip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.66"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp">
+
+            <RadioButton
+                android:id="@+id/payChip0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/weixin"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/payChip1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/zhifubao"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/payChip2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/cash"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/payChip3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/card"
+                android:textSize="@dimen/drawer_text_size" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/payClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/saleTimeText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="@dimen/drawer_margin"
+            android:text="@string/saleTime"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <TextView
+            android:id="@+id/saleTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.66"
+            android:background="@drawable/shape_rectangle_black"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:gravity="start|center"
+            android:hint="@string/choice_date"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="@dimen/drawer_margin"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/saleTimeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/reset" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/query"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.15"
+            android:background="@android:color/holo_blue_bright"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/query" />
+    </LinearLayout>
+</LinearLayout>

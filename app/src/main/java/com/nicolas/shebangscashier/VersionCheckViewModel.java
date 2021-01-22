@@ -1,0 +1,145 @@
+package com.nicolas.shebangscashier;
+
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.nicolas.shebangscashier.app.MyApp;
+import com.nicolas.shebangscashier.common.OperateError;
+import com.nicolas.shebangscashier.common.OperateInUserView;
+import com.nicolas.shebangscashier.common.OperateResult;
+import com.nicolas.shebangscashier.communication.CommandResponse;
+import com.nicolas.shebangscashier.communication.CommandTypeEnum;
+import com.nicolas.shebangscashier.communication.CommandVo;
+import com.nicolas.shebangscashier.communication.Invoker;
+import com.nicolas.shebangscashier.communication.common.CommonInterface;
+import com.nicolas.toollibrary.HttpHandler;
+import com.nicolas.toollibrary.apkdown.ApkDownClass;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class VersionCheckViewModel extends ViewModel {
+    private String appCurrentVersion;       //app当前版本
+    private String appLastVersion;          //app最新版本
+    String TAG = "VersionCheckViewModel";
+
+    private MutableLiveData<OperateResult> matchVersionResult = new MutableLiveData<>();        //版本比较结果
+    private MutableLiveData<OperateResult> newAppDownResult = new MutableLiveData<>();          //新版本app下载结果
+
+    public VersionCheckViewModel() {
+        //获取app当前版本
+        PackageManager manager = MyApp.getInstance().getPackageManager();
+        try {
+            PackageInfo info = manager.getPackageInfo(MyApp.getInstance().getPackageName(), 0);
+            this.appCurrentVersion = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            this.appCurrentVersion = "";
+        }
+    }
+
+    public LiveData<OperateResult> getMatchVersionResult() {
+        return matchVersionResult;
+    }
+
+    public LiveData<OperateResult> getNewAppDownResult() {
+        return newAppDownResult;
+    }
+
+    /**
+     * app版本检测
+     */
+    public void checkAppLastVersion() {
+        CommandVo vo = new CommandVo();
+        vo.typeEnum = CommandTypeEnum.COMMAND_COMMON;
+        vo.url = CommonInterface.VersionCheck;
+        vo.contentType = HttpHandler.ContentType_APP;
+        vo.requestMode = HttpHandler.RequestMode_GET;
+        Map<String, String> parameters = new HashMap<>();
+        vo.parameters = parameters;
+        Invoker.getInstance().setOnEchoResultCallback(this.callback);
+        Invoker.getInstance().exec(vo);
+    }
+
+    /**
+     * 下载新版本App
+     */
+    public void downNewVersionApp(String url) {
+        new ApkDownClass(MyApp.getInstance(), url, MyApp.getInstance().getApkSavePath(), new ApkDownClass.OnApkDownListener() {
+            @Override
+            public void downFinish(String apkPath) {
+                if (TextUtils.isEmpty(apkPath)) {
+                    newAppDownResult.setValue(new OperateResult(
+                            new OperateError(-1, MyApp.getInstance().getString(R.string.downApkFailed), null)));
+                } else {
+                    Message msg = new Message();
+                    msg.obj = apkPath;
+                    newAppDownResult.setValue(new OperateResult(new OperateInUserView(msg)));
+                }
+            }
+        }).downApk();
+    }
+
+    /**
+     * 响应
+     */
+    private Invoker.OnExecResultCallback callback = new Invoker.OnExecResultCallback() {
+        @Override
+        public void execResult(CommandResponse result) {
+            switch (result.url) {
+                case CommonInterface.VersionCheck:
+                    if (result.success) {
+                        appLastVersion = result.data;
+                    } else {
+                        appLastVersion = "";
+                    }
+                    matchAppVersion();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 版本比较
+     */
+    private void matchAppVersion() {
+        if (TextUtils.isEmpty(appCurrentVersion)) {
+            matchVersionResult.setValue(new OperateResult(new OperateError(-1,
+                    MyApp.getInstance().getString(R.string.localCheckAppVFailed), null)));
+        } else if (TextUtils.isEmpty(appLastVersion)) {
+            matchVersionResult.setValue(new OperateResult(new OperateError(-1,
+                    MyApp.getInstance().getString(R.string.remoteCheckAppVFailed), null)));
+        } else {
+            Message msg = new Message();
+            String[] cv = appCurrentVersion.split(".");
+            String[] lv = appLastVersion.split(".");
+            boolean havNewV = false;
+            for (int i = 0; i < Math.min(cv.length, lv.length); i++) {
+                if (Integer.parseInt(cv[i]) < Integer.parseInt(lv[i])) {
+                    havNewV = true;
+                    break;
+                }
+            }
+
+            if (havNewV) {     //有新版本app发布
+                msg.what = 1;
+            } else {
+                if (lv.length > cv.length) {
+                    msg.what = 1;
+                } else {
+                    msg.what = 0;
+                }
+            }
+            matchVersionResult.setValue(new OperateResult(new OperateInUserView(msg)));
+        }
+    }
+}

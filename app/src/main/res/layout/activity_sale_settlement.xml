@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:text="@string/settlement_text_bill"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <com.donkingliang.groupedadapter.widget.StickyHeaderLayout
+        android:id="@+id/stickyHeaderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/settlement_lf_margin"
+        android:layout_marginEnd="@dimen/settlement_lf_margin"
+        android:layout_weight="0.6">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settlementRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.donkingliang.groupedadapter.widget.StickyHeaderLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one_layer_nesting_margin"
+        android:background="?android:attr/listDivider" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vipPhone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/settlement_msg_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_vip"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:drawablePadding="@dimen/drawable_to_text_margin"
+            android:gravity="center|start"
+            android:singleLine="true"
+            android:text="@string/settlement_text_vipId" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/three_layer_nesting_margin"
+            android:layout_marginStart="@dimen/settlement_lf_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/useIntegral"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/settlement_msg_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_integral_none"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:drawablePadding="@dimen/drawable_to_text_margin"
+            android:gravity="center|start"
+            android:singleLine="true"
+            android:text="@string/settlement_text_integral" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/three_layer_nesting_margin"
+            android:layout_marginStart="@dimen/settlement_lf_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/payMethod"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/settlement_msg_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_paycase"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:drawablePadding="@dimen/drawable_to_text_margin"
+            android:gravity="center|start"
+            android:singleLine="true"
+            android:text="@string/settlement_pay_case" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/three_layer_nesting_margin"
+            android:layout_marginStart="@dimen/settlement_lf_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/cash"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/settlement_msg_margin"
+            android:layout_marginEnd="@dimen/settlement_lf_margin"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_settlementcash"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:drawablePadding="@dimen/drawable_to_text_margin"
+            android:gravity="center|start"
+            android:singleLine="true"
+            android:text="@string/settlement_settlement_cash" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one_layer_nesting_margin"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settlement_msg_margin"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:text="@string/settlement_text_payment"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="@dimen/three_layer_nesting_margin"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:text="@string/settlement_text_change"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="@dimen/three_layer_nesting_margin"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/settlement_msg_margin"
+            android:layout_weight="2"
+            android:background="@drawable/shape_rectangle_grey"
+            android:clickable="false"
+            android:text="@string/yes" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+</androidx.appcompat.widget.LinearLayoutCompat>

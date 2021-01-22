@@ -1,0 +1,247 @@
+<resources>
+    <string name="app_name">收银</string>
+
+    <!--权限请求-->
+    <string name="request_power">权限请求!</string>
+    <string name="request_power_WES">App需要获取所有的权限,请允许！</string>
+    <!--app异常崩溃-->
+    <string name="app_crash">App异常崩溃</string>
+    <string name="app_crash_msg">很抱歉，App异常崩溃了!</string>
+    <string name="app_crash_reset">重启App</string>
+    <string name="app_crash_close">退出App</string>
+    <string name="app_create_file_failed">创建数据文件失败</string>
+    <string name="app_create_file_failed_msg">创建App数据文件失败,App退出运行!</string>
+
+    <!--email-->
+    <string name="emailForm">prxd_suppier_debug@163.com</string>
+    <string name="formPassword">VSEPLSKVDCXTSAWD</string>
+    <string name="emailTo">fshq_debug@163.com</string>
+    <string name="emailContentHead">She bangs cashier</string>
+
+    <!--登陆-->
+    <string name="login_name">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="action_sign_in">登陆</string>
+    <string name="action_sign_in_short">登陆</string>
+    <string name="welcome">"欢迎:"</string>
+    <string name="invalid_username">用户名或密码有误</string>
+    <string name="invalid_password">密码须大于5位</string>
+    <string name="login">"登陆"</string>
+    <string name="login_ing">"登陆中…"</string>
+    <string name="login_failed">"登陆失败"</string>
+    <string name="get_warehouse_failed">获取库房信息失败</string>
+    <string name="get_staffs_failed">获取库房人员信息失败</string>
+    <string name="login_onduty_staff">选择在岗人员</string>
+    <string name="logout">用户登出</string>
+    <string name="user_logout">确定要注销当前用户？</string>
+    <string name="logout_failed">登出失败</string>
+    <string name="logout_success">用户登出成功</string>
+    <string name="getting_staff">获取工作人员信息中…</string>
+    <string name="getting_warehouse">获取库房信息中…</string>
+    <string name="errorData">无法识别的JSon数据</string>
+    <string name="employees">选择导购</string>
+    <string name="loginTimeOut">登录失效，请重新登录</string>
+    <string name="loginAgain">请重新登录</string>
+
+    <!--activity-->
+    <string name="activity_login">登陆</string>
+    <string name="activity_main">主页</string>
+    <string name="activity_printer">打印机</string>
+    <string name="activity_sale">售卖</string>
+    <string name="activity_settlement">收银</string>
+    <string name="activity_receipt">小票查询</string>
+    <string name="activity_day_statistics">日销售统计</string>
+    <string name="activity_new_goods_statistics">新货销售统计</string>
+    <string name="activity_old_goods_statistics">旧货销售统计</string>
+
+    <!--导航-->
+    <string name="nav_dev_manager">设备管理</string>
+    <string name="nav_set_scan">扫描设置</string>
+    <string name="nav_set_print">打印设置</string>
+
+    <!--前台收银导航-->
+    <string name="nav_cashier_title">前台收银</string>
+    <string name="nav_cashier_cashier">收银</string>
+    <string name="nav_cashier_inventory">盘点</string>
+    <string name="nav_cashier_inventory_query">盘点查询</string>
+    <string name="nav_cashier_receiver">收货</string>
+    <string name="nav_cashier_transfer_in">调入货</string>
+    <string name="nav_cashier_transfer_out">调出货</string>
+    <string name="nav_cashier_bill_query">小票查询</string>
+    <string name="nav_cashier_vip_query">会员查询</string>
+    <string name="nav_cashier_new_sales_query">新货销售记录</string>
+    <string name="nav_cashier_old_sales_query">旧货销售记录</string>
+    <string name="nav_cashier_sales_statistics">销售统计</string>
+    <string name="nav_cashier_remittance">汇款登记</string>
+    <string name="nav_cashier_order_submit">工单提交</string>
+
+    <!--nav title-->
+    <string name="title_sale">销售</string>
+    <string name="title_set">设置</string>
+    <string name="title_manage">管理</string>
+    <string name="printer_title">打印机</string>
+
+    <!--打印机activity-->
+    <string name="printer_label">打印机设置</string>
+    <string name="printer_linking">打印机连接中...</string>
+    <string name="printer_linked">打印机已连接</string>
+    <string name="printer_scanning">打印机扫描中...</string>
+    <string name="printer_scan_finish">扫描完成</string>
+    <string name="printer_test">打印测试</string>
+    <string name="printer_no_link">未连接打印机，请先连接</string>
+    <string name="printer_bill">票据打印机</string>
+    <string name="printer_code">条码打印机</string>
+    <string name="printer_cpcl">单面打印机</string>
+    <!--wifi打印机-->
+    <string name="printer_wifi_title">WIFI打印机</string>
+    <string name="printer_wifi_describe">当前可搜索附件的WiFi打印机</string>
+    <!--bluetooth打印机-->
+    <string name="printer_bluetooth_title">蓝牙打印机</string>
+    <string name="printer_bluetooth_describe_on">当前可搜索附件的蓝牙打印机</string>
+    <string name="printer_bluetooth_describe_off">打开蓝牙以搜索附件的蓝牙打印机</string>
+    <!--收银结算-->
+    <string name="settlement_label">收银台</string>
+    <string name="settlement_detailed_label">收银明细</string>
+    <string name="settlement_text_vipId">vip会员</string>
+    <string name="settlement_text_integral">使用积分</string>
+    <string name="settlement_pay_case">付款方式</string>
+    <string name="settlement_settlement_cash">结算收银</string>
+    <string name="settlement_text_payment">实付:</string>
+    <string name="settlement_text_change">找零:</string>
+    <string name="settlement_text_bill">账单明细</string>
+    <string name="input_settlement_cash">请输入结算金额</string>
+    <string name="input_exchange_integral">请输入兑换积分</string>
+    <string name="settlement_actualPayment_error">实付金额小于应付金额</string>
+    <string name="settlement_exchange_error">可兑换积分不足</string>
+    <string name="input_settlement_phone">请输入会员电话号码</string>"
+    <string name="vip_integral">积分</string>
+    <string name="vip_integral_deduction">可抵扣￥</string>
+    <string name="settlement_print_bill">小票打印</string>
+    <string name="settlement_submit_print">收银成功，是否打印小票！</string>
+    <!--收银小票-->
+    <string name="receipt_title">怦然心动连锁服饰\n</string>
+    <string name="receipt_subtitle">收银小票\n</string>
+    <string name="receipt_code">小票编号：</string>
+    <string name="receipt_complaints_hotline">投诉电话：</string>
+    <string name="receipt_guider">导 购 员：</string>
+    <string name="receipt_print_time">打印时间：</string>
+    <string name="receipt_goods_name">品名</string>
+    <string name="receipt_goods_num">数量</string>
+    <string name="receipt_goods_price">单价</string>
+    <string name="receipt_num_total">合计数量：</string>
+    <string name="receipt_price_total">合计金额：</string>
+    <string name="receipt_Collection">收款：</string>
+    <string name="receipt_give_change">找零：</string>
+    <string name="receipt_vip_tel">会员手机号码：</string>
+    <string name="receipt_sale_integral">本次积分：</string>
+    <string name="receipt_consume_integral">消费积分：</string>
+    <string name="receipt_offset_cash">抵扣现金：</string>
+    <string name="receipt_surplus_integral">剩余积分：</string>
+    <string name="receipt_warning">千万注意：</string>
+    <string name="receipt_back_term">★此单商品退换货最后期限是</string>
+    <string name="receipt_back_condition">★退换货须同时具备以下条件：</string>
+    <string name="receipt_back_condition1">●出示购买时的收银小票</string>
+    <string name="receipt_back_condition2">●所退还商品不影响再次销售</string>
+    <string name="receipt_back_condition3">●所退换商品未经穿着、未见水、未弄脏、无损坏、吊牌未摘除</string>
+    <string name="receipt_address">地址：</string>
+    <string name="receipt_print_division">--------------------------------\n</string>
+    <!--other-->
+    <string name="search">搜索</string>
+    <string name="cashier">收银员</string>
+    <string name="code">条码</string>
+    <string name="old_sale">旧货销售</string>
+    <string name="settlement">结算</string>
+    <string name="明细" />
+    <string name="delete">删除</string>
+    <string name="money">￥</string>
+    <string name="status">状态</string>
+    <string name="stock">库存</string>
+    <string name="query_goods">货物信息查询中...</string>
+    <string name="format_error">格式错误</string>
+    <string name="details">明细</string>
+    <string name="repeat_code">重复条码</string>
+    <string name="price">单价</string>
+    <string name="num">数量</string>
+    <string name="goods_class">货物类别</string>
+    <string name="inputNull">输入为空</string>
+    <string name="no_code_old_id">无码旧货</string>
+    <string name="total_price">总价</string>
+    <string name="print_success">打印成功</string>
+    <string name="detailed">明细</string>
+    <string name="total">合计</string>
+    <string name="print_bill">打印小票</string>
+    <string name="build_json_error">组件json失败</string>
+    <string name="sale_success">售卖成功</string>
+    <string name="sale_submitting">售卖提交中...</string>
+    <string name="querying">查询中...</string>
+    <string name="branch">分店</string>
+    <string name="colon">：</string>
+    <string name="vip">会员</string>
+    <string name="this_integral">本次积分</string>
+    <string name="consume_integral">消费积分</string>
+    <string name="residual_integral">消费积分</string>
+    <string name="collection">收款金额</string>
+    <string name="deduction">积分抵扣</string>
+    <string name="receivable">应收金额</string>
+    <string name="total_cash">收款合计</string>
+    <string name="settlement_success_finish">本次结算完成，是否开始新的收银</string>
+    <string name="settlement_success">结算成功</string>
+    <string name="notTelephoneNumber">输入并非电话号码，请检查</string>
+    <string name="notTelIgnore">此并非电话号码,是否忽略并继续?</string>
+    <string name="version_check">版本检测中...</string>
+    <string name="newVersionDowning">新版本App下载中...</string>
+    <string name="newVersionChecking">App版本检测中...</string>
+    <string name="downApkFailed">下载Apk失败...</string>
+    <string name="localCheckAppVFailed">本地检测App版本失败</string>
+    <string name="remoteCheckAppVFailed">获取App版本失败，请检查网络连接</string>
+    <string name="app_will_shutdown">版本检测失败，请检测网络连接，app将退出!</string>
+    <string name="nav_cashier_back_print">返货条码打印</string>
+    <string name="nav_cashier_refunds">商品退货</string>
+    <string name="receipt">小票编号</string>
+    <string name="repeat_receipt">重复小票</string>
+    <string name="goods_code">商品条码</string>
+    <string name="colon_zh">：</string>
+    <string name="goods_type">商品类别</string>
+    <string name="sale_date">销售日期</string>
+    <string name="receipt_id">小票编号</string>
+    <string name="noData">无数据</string>
+    <string name="date_format_error">数据格式错误</string>
+    <string name="choice_date">请选择日期</string>
+    <string name="query">查询</string>
+    <string name="print">打印</string>
+    <string name="intergeralUse">积分使用</string>
+    <string name="intergeralDeduction">抵扣金额</string>
+    <string name="num_count">数量合计</string>
+    <string name="user">导购</string>
+    <string name="seasonName">季节装</string>
+    <string name="goodsClass">类型</string>
+    <string name="goodsId">新货号</string>
+    <string name="sId">供应商编号</string>
+    <string name="amount">库存</string>
+    <string name="salePrice">售价</string>
+    <string name="saleNum">数量</string>
+    <string name="clear">清空</string>
+    <string name="vipPhone">会员手机</string>
+    <string name="payMethod">付款方式</string>
+    <string name="weixin">微信</string>
+    <string name="zhifubao">支付宝</string>
+    <string name="cash">现金</string>
+    <string name="card">刷卡</string>
+    <string name="spring">春装</string>
+    <string name="summer">夏装</string>
+    <string name="autumn">秋装</string>
+    <string name="winter">冬装</string>
+    <string name="goodsClassType">商品类型</string>
+    <string name="saleTime">销售时间</string>
+    <string name="reset">重置</string>
+    <string name="no_more_load">无更多数据</string>
+    <string name="screen">筛选</string>
+    <string name="goodsClassChoice">货物类别选择</string>
+    <string name="sIdInput">请输入供应商编号</string>
+    <string name="vipPhoneInput">请输入会员手机号码</string>
+    <string name="goodsCodeInput">请输入商品条码</string>
+    <string name="goodsIdInput">请输入新货号</string>
+    <string name="receiptInput">请输入小票编号</string>
+    <string name="goodsClassNum">商品数量</string>
+    <string name="goodsClassPrice">商品单价</string>
+</resources>

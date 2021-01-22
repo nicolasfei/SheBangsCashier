@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/settlement_msg_margin"
+        android:layout_weight="3"
+        android:gravity="start"
+        android:text="羽绒服"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/settlement_list_text" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:text="x1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/settlement_list_text" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.25"
+        android:gravity="center"
+        android:text="￥246.00"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/settlement_list_text" />
+</androidx.appcompat.widget.LinearLayoutCompat>
