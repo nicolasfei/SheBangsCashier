@@ -16,4 +16,11 @@ public abstract class SaleInterface extends AbstractInterface {
     public final static String SaleQuery = AbstractInterface.COMMAND_URL + "Cashier/Sale";
     //销售统计
     public final static String SaleStatistics = AbstractInterface.COMMAND_URL + "Cashier/SaleStatistics";
+
+    //退货查询
+    public final static String BarCodeBackById = AbstractInterface.COMMAND_URL + "Cashier/BarCodeBackById";
+    //退货
+    public final static String BarCodeBack = AbstractInterface.COMMAND_URL + "Cashier/BarCodeBack";
+    //积分抵扣金额
+    public final static String IntegralActivityBack = AbstractInterface.COMMAND_URL + "Cashier/IntegralActivityBack";
 }

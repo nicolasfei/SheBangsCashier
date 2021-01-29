@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="店&#12288;&#12288;铺" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="JM46"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收银日期" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/shape_rectangle_black"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:gravity="start|center"
+            android:hint="@string/choice_date" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="营&#8194;业&#8194;额" />
+
+        <EditText
+            android:id="@+id/turnover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:singleLine="true"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="积分抵扣" />
+
+        <EditText
+            android:id="@+id/integralDeduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:singleLine="true"
+            android:inputType="numberDecimal"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="实&#8194;收&#8194;款" />
+
+        <EditText
+            android:id="@+id/actualCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="物流快递" />
+
+        <EditText
+            android:id="@+id/logistics"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="水电气费" />
+
+        <EditText
+            android:id="@+id/waterAndElectricityCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:inputType="numberDecimal"
+            android:gravity="center"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="衣服修补" />
+
+        <EditText
+            android:id="@+id/repair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:gravity="center"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="折扣开支" />
+
+        <EditText
+            android:id="@+id/discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="其他开支" />
+
+        <EditText
+            android:id="@+id/other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:singleLine="true"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="工资支出" />
+
+        <EditText
+            android:id="@+id/wages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:text="备&#12288;&#12288;注" />
+
+        <EditText
+            android:id="@+id/remarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:singleLine="true"
+            android:gravity="center"
+            android:inputType="text"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="start|center"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:text="注：水电气，工资，物流快递，衣服修补，其他开支项如大于等于100，须上传支付凭证。"
+        android:textColor="@android:color/holo_red_light" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="start|center"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:text="上传图片" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <GridView
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:numColumns="3"
+        android:layout_weight="5"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@android:color/black" />
+</LinearLayout>

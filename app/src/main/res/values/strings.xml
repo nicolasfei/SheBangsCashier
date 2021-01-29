@@ -244,4 +244,6 @@
     <string name="receiptInput">请输入小票编号</string>
     <string name="goodsClassNum">商品数量</string>
     <string name="goodsClassPrice">商品单价</string>
+    <string name="deductionIntegral">扣除积分</string>
+    <string name="cashTime">收银日期</string>
 </resources>

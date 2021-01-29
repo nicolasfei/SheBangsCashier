@@ -18,13 +18,19 @@ public class SaleCommand extends Command {
         SaleInterface saleByEverDay = new SaleByEverDay();
         SaleInterface saleQuery = new SaleQuery();
         SaleInterface saleStatistics = new SaleStatistics();
+        SaleInterface barCodeBack = new SaleStatistics();
+        SaleInterface barCodeBackById = new SaleStatistics();
+        SaleInterface integralActivityBack = new SaleStatistics();
 
         saleQueryCode.setNextHandler(saleGoodsSale);
         saleGoodsSale.setNextHandler(saleReceipt);
         saleReceipt.setNextHandler(saleByEverDay);
         saleByEverDay.setNextHandler(saleQuery);
         saleQuery.setNextHandler(saleStatistics);
-        saleStatistics.setNextHandler(null);
+        saleStatistics.setNextHandler(barCodeBack);
+        barCodeBack.setNextHandler(barCodeBackById);
+        barCodeBackById.setNextHandler(integralActivityBack);
+        integralActivityBack.setNextHandler(null);
 
         super.firstNode = saleQueryCode;
     }
