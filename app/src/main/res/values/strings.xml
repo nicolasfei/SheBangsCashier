@@ -246,4 +246,5 @@
     <string name="goodsClassPrice">商品单价</string>
     <string name="deductionIntegral">扣除积分</string>
     <string name="cashTime">收银日期</string>
+    <string name="contentDescription">contentDescription</string>
 </resources>

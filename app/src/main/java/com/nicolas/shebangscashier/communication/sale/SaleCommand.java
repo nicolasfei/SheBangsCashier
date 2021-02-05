@@ -21,6 +21,9 @@ public class SaleCommand extends Command {
         SaleInterface barCodeBack = new SaleStatistics();
         SaleInterface barCodeBackById = new SaleStatistics();
         SaleInterface integralActivityBack = new SaleStatistics();
+        SaleInterface remittanceEdit = new RemittanceEdit();
+        SaleInterface remittance = new Remittance();
+        SaleInterface remittanceById = new RemittanceById();
 
         saleQueryCode.setNextHandler(saleGoodsSale);
         saleGoodsSale.setNextHandler(saleReceipt);
@@ -30,7 +33,10 @@ public class SaleCommand extends Command {
         saleStatistics.setNextHandler(barCodeBack);
         barCodeBack.setNextHandler(barCodeBackById);
         barCodeBackById.setNextHandler(integralActivityBack);
-        integralActivityBack.setNextHandler(null);
+        integralActivityBack.setNextHandler(remittanceEdit);
+        remittanceEdit.setNextHandler(remittance);
+        remittance.setNextHandler(remittanceById);
+        remittanceById.setNextHandler(null);
 
         super.firstNode = saleQueryCode;
     }

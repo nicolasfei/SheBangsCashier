@@ -12,6 +12,10 @@
     <!--sd卡:android 6.0以上需要动态申请权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--访问相机-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <!--杀死与指定包相关联的所有后台进程，这与内核杀死那些进程回收内存是一样的(binderDied 处理)，但这些进程如果在将来某一时刻需要使用，会重新启动-->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 

@@ -23,4 +23,11 @@ public abstract class SaleInterface extends AbstractInterface {
     public final static String BarCodeBack = AbstractInterface.COMMAND_URL + "Cashier/BarCodeBack";
     //积分抵扣金额
     public final static String IntegralActivityBack = AbstractInterface.COMMAND_URL + "Cashier/IntegralActivityBack";
+
+    //每日汇款登记
+    public final static String RemittanceEdit = AbstractInterface.COMMAND_URL + "Cashier/RemittanceEdit";
+    //每日汇款登记查询
+    public final static String Remittance = AbstractInterface.COMMAND_URL + "Cashier/Remittance";
+    //汇款登记单个查询
+    public final static String RemittanceById = AbstractInterface.COMMAND_URL + "Cashier/RemittanceById";
 }

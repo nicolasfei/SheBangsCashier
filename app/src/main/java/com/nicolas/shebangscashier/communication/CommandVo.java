@@ -1,5 +1,7 @@
 package com.nicolas.shebangscashier.communication;
 
+import android.text.TextUtils;
+
 import com.nicolas.shebangscashier.cashier.MyKeeper;
 
 import java.util.Map;
@@ -13,6 +15,10 @@ public class CommandVo {
     public CommandTypeEnum typeEnum;
 
     public CommandVo() {
-        this.token = MyKeeper.getInstance().getToken();
+        if (TextUtils.isEmpty(MyKeeper.getInstance().getToken())) {
+            this.token = "";
+        } else {
+            this.token = "Bearer " + MyKeeper.getInstance().getToken();
+        }
     }
 }

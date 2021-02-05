@@ -82,7 +82,6 @@ public class LoginViewModel extends ViewModel {
         CommandVo vo = new CommandVo();
         vo.typeEnum = CommandTypeEnum.COMMAND_LOGIN;
         vo.url = LoginInterface.QueryEmployees;
-        vo.token = MyKeeper.getInstance().getToken();
         vo.contentType = HttpHandler.ContentType_APP;
         vo.requestMode = HttpHandler.RequestMode_POST;
         Map<String, String> parameters = new HashMap<>();

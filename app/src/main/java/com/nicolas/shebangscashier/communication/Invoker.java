@@ -3,6 +3,7 @@ package com.nicolas.shebangscashier.communication;
 import android.os.Handler;
 
 import com.nicolas.shebangscashier.communication.common.CommonCommand;
+import com.nicolas.shebangscashier.communication.manage.ManageCommand;
 import com.nicolas.shebangscashier.communication.sale.SaleCommand;
 import com.nicolas.shebangscashier.communication.vip.VipCommand;
 import com.nicolas.shebangscashier.communication.login.LoginCommand;
@@ -23,6 +24,7 @@ public class Invoker {
         commandList.add(new LoginCommand());
         commandList.add(new SaleCommand());
         commandList.add(new VipCommand());
+        commandList.add(new ManageCommand());
     }
 
     public static Invoker getInstance() {
