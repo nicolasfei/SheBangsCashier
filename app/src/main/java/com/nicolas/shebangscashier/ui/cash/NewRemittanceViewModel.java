@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
 import com.nicolas.shebangscashier.common.NewGoodsSaleStatistics;
+import com.nicolas.shebangscashier.common.NewRemittance;
 import com.nicolas.shebangscashier.common.OperateError;
 import com.nicolas.shebangscashier.common.OperateInUserView;
 import com.nicolas.shebangscashier.common.OperateResult;
@@ -25,6 +26,7 @@ import com.nicolas.toollibrary.imageupload.ImageUpLoadClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +43,8 @@ public class NewRemittanceViewModel extends ViewModel {
 
     public NewRemittanceViewModel() {
         this.remittance = new NewRemittance();
-        this.queryRemittances = new ArrayList<>();          //保存查询的汇款登记
-        this.remittance.cashierTime = Tool.getTodayDate();     //默认当天
+        this.queryRemittances = new ArrayList<>();                  //保存查询的汇款登记
+        this.remittance.setCashierTime(Tool.getTodayDate());        //默认当天
 
         this.updateRemittanceResult = new MutableLiveData<>();
         this.queryRemittanceResult = new MutableLiveData<>();
@@ -55,7 +57,7 @@ public class NewRemittanceViewModel extends ViewModel {
      * @return vouchers
      */
     public List<Bitmap> getVouchers() {
-        return remittance.vouchers;
+        return remittance.getVouchers();
     }
 
     /**
@@ -74,7 +76,7 @@ public class NewRemittanceViewModel extends ViewModel {
      */
     public void addPhoto(String filePath) {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath, null);
-        this.remittance.vouchers.add(bitmap);
+        this.remittance.getVouchers().add(bitmap);
     }
 
     /**
@@ -83,8 +85,8 @@ public class NewRemittanceViewModel extends ViewModel {
      * @param pos 照片所在位置
      */
     public void deletePhoto(int pos) {
-        if (this.remittance.vouchers.size() >= pos) {
-            this.remittance.vouchers.remove(pos);
+        if (this.remittance.getVouchers().size() >= pos) {
+            this.remittance.getVouchers().remove(pos);
         }
     }
 
@@ -105,38 +107,38 @@ public class NewRemittanceViewModel extends ViewModel {
         vo.contentType = HttpHandler.ContentType_APP;
         vo.requestMode = HttpHandler.RequestMode_POST;
         Map<String, String> parameters = new HashMap<>();
-        if (!TextUtils.isEmpty(remittance.cashierTime)) {
-            parameters.put("cashierTime", remittance.cashierTime);
+        if (!TextUtils.isEmpty(remittance.getCashierTime())) {
+            parameters.put("cashierTime", remittance.getCashierTime());
         }
-        if (!TextUtils.isEmpty(remittance.id)) {
-            parameters.put("id", remittance.id);
+        if (!TextUtils.isEmpty(remittance.getId())) {
+            parameters.put("id", remittance.getId());
         }
-        if (!TextUtils.isEmpty(remittance.electricalWaterCost)) {
-            parameters.put("electricalWaterCost", remittance.electricalWaterCost);
+        if (!TextUtils.isEmpty(remittance.getElectricalWaterCost())) {
+            parameters.put("electricalWaterCost", remittance.getElectricalWaterCost());
         }
-        if (!TextUtils.isEmpty(remittance.wageCost)) {
-            parameters.put("wageCost", remittance.wageCost);
+        if (!TextUtils.isEmpty(remittance.getWageCost())) {
+            parameters.put("wageCost", remittance.getWageCost());
         }
-        if (!TextUtils.isEmpty(remittance.expressCost)) {
-            parameters.put("expressCost", remittance.expressCost);
+        if (!TextUtils.isEmpty(remittance.getExpressCost())) {
+            parameters.put("expressCost", remittance.getExpressCost());
         }
-        if (!TextUtils.isEmpty(remittance.rentCost)) {
-            parameters.put("rentCost", remittance.rentCost);
+        if (!TextUtils.isEmpty(remittance.getRentCost())) {
+            parameters.put("rentCost", remittance.getRentCost());
         }
-        if (!TextUtils.isEmpty(remittance.clothesCost)) {
-            parameters.put("clothesCost", remittance.clothesCost);
+        if (!TextUtils.isEmpty(remittance.getClothesCost())) {
+            parameters.put("clothesCost", remittance.getClothesCost());
         }
-        if (!TextUtils.isEmpty(remittance.discountCost)) {
-            parameters.put("discountCost", remittance.discountCost);
+        if (!TextUtils.isEmpty(remittance.getDiscountCost())) {
+            parameters.put("discountCost", remittance.getDiscountCost());
         }
-        if (!TextUtils.isEmpty(remittance.otherCost)) {
-            parameters.put("otherCost", remittance.otherCost);
+        if (!TextUtils.isEmpty(remittance.getOtherCost())) {
+            parameters.put("otherCost", remittance.getOtherCost());
         }
-        if (!TextUtils.isEmpty(remittance.remark)) {
-            parameters.put("remark", remittance.remark);
+        if (!TextUtils.isEmpty(remittance.getRemark())) {
+            parameters.put("remark", remittance.getRemark());
         }
-        if (!TextUtils.isEmpty(remittance.certificate)) {
-            parameters.put("certificate", remittance.certificate);
+        if (!TextUtils.isEmpty(remittance.getCertificate())) {
+            parameters.put("certificate", remittance.getCertificate());
         }
 
         vo.parameters = parameters;
@@ -148,7 +150,7 @@ public class NewRemittanceViewModel extends ViewModel {
      * 上传图片
      */
     private void uploadPhoto() {
-        new ImageUpLoadClass("https://file.scdawn.com/CashierImg/upload", this.remittance.vouchers,
+        new ImageUpLoadClass("https://file.scdawn.com/CashierImg/upload", this.remittance.getVouchers(),
                 new ImageUpLoadClass.OnImageUploadFinishCallBack() {
                     @Override
                     public void uploadFinish(List<String> uploadResult) {
@@ -157,7 +159,7 @@ public class NewRemittanceViewModel extends ViewModel {
                             builder.append(c).append(",");
                         }
                         String certificate = builder.toString();
-                        remittance.certificate = certificate.substring(0, certificate.length() - 1);
+                        remittance.setCertificate(certificate.substring(0, certificate.length() - 1));
                         //提交汇款登记
                         submitRemittance();
                     }
@@ -199,165 +201,4 @@ public class NewRemittanceViewModel extends ViewModel {
             }
         }
     };
-
-    public class NewRemittance {
-        private String id = "";                 //汇款登记ID，修改时存在，新增是为空
-        private String b_b_Branch_Id="";
-        private String cashierTime = "";        //收银日期
-        private String turnover = "";           //营业额
-        private String rentCost = "";           //抵扣积分
-        private String actualCollection = "";   //实收款
-
-        private String expressCost = "";            //物流快递
-        private String electricalWaterCost = "";    //水电气费
-        private String clothesCost = "";            //衣服修补
-        private String discountCost = "";           //折扣开支
-        private String otherCost = "";              //其他开支
-        private String wageCost = "";               //工资支出
-        private String remark = "";             //备注
-        private String valid = "";              //是否启用
-        private String certificate = "";        //凭证
-
-
-        private List<Bitmap> vouchers;          //支付凭证List
-
-        private boolean isUpdate = false;
-
-        public NewRemittance() {
-            this.vouchers = new ArrayList<>();
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getCashierTime() {
-            return cashierTime;
-        }
-
-        public void setCashDate(String cashierTime) {
-            if (!this.cashierTime.equals(cashierTime)) {
-                this.cashierTime = cashierTime;
-                this.isUpdate = true;
-            }
-        }
-
-        public void setRemarks(String remarks) {
-            if (!this.remark.equals(remarks)) {
-                this.remark = remarks;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getRemark() {
-            return remark;
-        }
-
-        public void setWageCost(String wages) {
-            if (!this.wageCost.equals(wages)) {
-                this.wageCost = wages;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getWageCost() {
-            return wageCost;
-        }
-
-        public void setOtherCost(String other) {
-            if (!this.otherCost.equals(other)) {
-                this.otherCost = other;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getOtherCost() {
-            return otherCost;
-        }
-
-        public void setDiscountCost(String discount) {
-            if (!this.discountCost.equals(discount)) {
-                this.discountCost = discount;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getDiscountCost() {
-            return discountCost;
-        }
-
-        public void setClothesCost(String repair) {
-            if (!this.clothesCost.equals(repair)) {
-                this.clothesCost = repair;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getClothesCost() {
-            return clothesCost;
-        }
-
-        public void setElectricalWaterCost(String waterAndElectricityCost) {
-            if (!this.electricalWaterCost.equals(waterAndElectricityCost)) {
-                this.electricalWaterCost = waterAndElectricityCost;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getElectricalWaterCost() {
-            return electricalWaterCost;
-        }
-
-        public void setExpressCost(String logistics) {
-            if (!this.expressCost.equals(logistics)) {
-                this.expressCost = logistics;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getExpressCost() {
-            return expressCost;
-        }
-
-        public void setTurnover(String turnover) {
-            if (!this.turnover.equals(turnover)) {
-                this.turnover = turnover;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getTurnover() {
-            return turnover;
-        }
-
-        public void setRentCost(String integralDeduction) {
-            if (!this.rentCost.equals(integralDeduction)) {
-                this.rentCost = integralDeduction;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getRentCost() {
-            return rentCost;
-        }
-
-        public void setActualCollection(String actualCollection) {
-            if (!this.actualCollection.equals(actualCollection)) {
-                this.actualCollection = actualCollection;
-                this.isUpdate = true;
-            }
-        }
-
-        public String getActualCollection() {
-            return actualCollection;
-        }
-
-        public boolean isUpdate() {
-            return isUpdate;
-        }
-
-        public void resetIsUpdate() {
-            isUpdate = false;
-        }
-    }
 }

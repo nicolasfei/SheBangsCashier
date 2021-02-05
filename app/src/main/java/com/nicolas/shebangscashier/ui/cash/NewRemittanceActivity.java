@@ -105,7 +105,7 @@ public class NewRemittanceActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cashTime:
-                cashTimeChoice(viewModel.getRemittance().getCashDate());
+                cashTimeChoice(viewModel.getRemittance().getCashierTime());
                 break;
             case R.id.upload:
                 choosePhoto();
@@ -140,8 +140,8 @@ public class NewRemittanceActivity extends BaseActivity implements View.OnClickL
             viewModel.getRemittance().setTurnover(turnoverV);
         }
         String integralDeductionV = this.integralDeduction.getText().toString();    //抵扣积分
-        if (!TextUtils.isEmpty(integralDeductionV) && !integralDeductionV.equals(viewModel.getRemittance().getIntegralDeduction())) {
-            viewModel.getRemittance().setIntegralDeduction(integralDeductionV);
+        if (!TextUtils.isEmpty(integralDeductionV) && !integralDeductionV.equals(viewModel.getRemittance().getRentCost())) {
+            viewModel.getRemittance().setRentCost(integralDeductionV);
         }
         String actualCollectionV = this.actualCollection.getText().toString();      //实收款
         if (!TextUtils.isEmpty(actualCollectionV) && !actualCollectionV.equals(viewModel.getRemittance().getActualCollection())) {
@@ -149,32 +149,32 @@ public class NewRemittanceActivity extends BaseActivity implements View.OnClickL
         }
 
         String logisticsV = this.logistics.getText().toString();                    //物流快递
-        if (!TextUtils.isEmpty(logisticsV) && !logisticsV.equals(viewModel.getRemittance().getLogistics())) {
-            viewModel.getRemittance().setLogistics(logisticsV);
+        if (!TextUtils.isEmpty(logisticsV) && !logisticsV.equals(viewModel.getRemittance().getExpressCost())) {
+            viewModel.getRemittance().setExpressCost(logisticsV);
         }
         String waterAndElectricityCostV = this.waterAndElectricityCost.getText().toString();   //水电气费
-        if (!TextUtils.isEmpty(waterAndElectricityCostV) && !waterAndElectricityCostV.equals(viewModel.getRemittance().getWaterAndElectricityCost())) {
-            viewModel.getRemittance().setWaterAndElectricityCost(waterAndElectricityCostV);
+        if (!TextUtils.isEmpty(waterAndElectricityCostV) && !waterAndElectricityCostV.equals(viewModel.getRemittance().getElectricalWaterCost())) {
+            viewModel.getRemittance().setElectricalWaterCost(waterAndElectricityCostV);
         }
         String repairV = this.repair.getText().toString();                          //衣服修补
-        if (!TextUtils.isEmpty(repairV) && !repairV.equals(viewModel.getRemittance().getRepair())) {
-            viewModel.getRemittance().setRepair(repairV);
+        if (!TextUtils.isEmpty(repairV) && !repairV.equals(viewModel.getRemittance().getClothesCost())) {
+            viewModel.getRemittance().setClothesCost(repairV);
         }
         String discountV = this.discount.getText().toString();                      //折扣开支
-        if (!TextUtils.isEmpty(discountV) && !discountV.equals(viewModel.getRemittance().getDiscount())) {
-            viewModel.getRemittance().setDiscount(discountV);
+        if (!TextUtils.isEmpty(discountV) && !discountV.equals(viewModel.getRemittance().getDiscountCost())) {
+            viewModel.getRemittance().setDiscountCost(discountV);
         }
         String otherV = this.other.getText().toString();                            //其他开支
-        if (!TextUtils.isEmpty(otherV) && !otherV.equals(viewModel.getRemittance().getOther())) {
-            viewModel.getRemittance().setOther(otherV);
+        if (!TextUtils.isEmpty(otherV) && !otherV.equals(viewModel.getRemittance().getOtherCost())) {
+            viewModel.getRemittance().setOtherCost(otherV);
         }
         String wagesV = this.wages.getText().toString();                            //工资支出
-        if (!TextUtils.isEmpty(wagesV) && !wagesV.equals(viewModel.getRemittance().getWages())) {
-            viewModel.getRemittance().setWages(wagesV);
+        if (!TextUtils.isEmpty(wagesV) && !wagesV.equals(viewModel.getRemittance().getWageCost())) {
+            viewModel.getRemittance().setWageCost(wagesV);
         }
         String remarksV = this.remarks.getText().toString();                        //备注
-        if (!TextUtils.isEmpty(remarksV) && !remarksV.equals(viewModel.getRemittance().getRemarks())) {
-            viewModel.getRemittance().setRemarks(remarksV);
+        if (!TextUtils.isEmpty(remarksV) && !remarksV.equals(viewModel.getRemittance().getRemark())) {
+            viewModel.getRemittance().setRemark(remarksV);
         }
     }
 
