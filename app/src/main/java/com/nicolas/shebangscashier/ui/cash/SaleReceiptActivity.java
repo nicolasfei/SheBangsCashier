@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
 import com.nicolas.shebangscashier.common.GoodsInformationAdapter;
 import com.nicolas.shebangscashier.common.OperateResult;
+import com.nicolas.shebangscashier.communication.sale.SaleReceipt;
 import com.nicolas.toollibrary.BruceDialog;
 import com.nicolas.toollibrary.Tool;
 import com.nicolas.toollibrary.VibratorUtil;
@@ -36,7 +38,7 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
     private SaleReceiptViewModel viewModel;
     private PPdaScanner scanner;
     private TextView user;
-    private EditText receipt;
+    private TextView receipt;
     private EditText code;
     private TextView numCount, priceCount;
     private Button print;
@@ -74,7 +76,7 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
         receipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                receipt.selectAll();
+                showInputReceiptDialog();
             }
         });
         receipt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -170,6 +172,22 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
         viewModel.queryLastReceipt();
     }
 
+    /**
+     * 小票编号输入
+     */
+    private void showInputReceiptDialog() {
+        BruceDialog.showEditInputDialog(getString(R.string.receipt), getString(R.string.receipt_input), InputType.TYPE_CLASS_TEXT,
+                SaleReceiptActivity.this, new BruceDialog.OnInputFinishListener() {
+                    @Override
+                    public void onInputFinish(String itemName) {
+                        String receiptCode = receipt.getText().toString();
+                        if (!itemName.equals(receiptCode)) {
+                            handlerReceiptInput(itemName);
+                        }
+                    }
+                });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -198,6 +216,7 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
      * @param value 小票
      */
     private void handlerReceiptInput(String value) {
+        receipt.setText(value);
         showProgressDialog(getString(R.string.querying));
         viewModel.queryReceipt(value);
         code.requestFocus();

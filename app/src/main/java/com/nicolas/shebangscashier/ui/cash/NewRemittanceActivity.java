@@ -199,7 +199,7 @@ public class NewRemittanceActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void OnDateTimePick(String date) {
-                viewModel.getRemittance().setCashDate(date);
+//                viewModel.getRemittance().setCashDate(date);
                 updateCashTime(date);
             }
         });

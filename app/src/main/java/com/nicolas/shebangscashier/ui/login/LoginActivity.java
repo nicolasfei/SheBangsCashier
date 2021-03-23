@@ -131,7 +131,7 @@ public class LoginActivity extends BaseActivity {
                     loginIng = false;
                 }
                 if (result.getSuccess() != null) {
-                    showProgressDialog(getString(R.string.getting_warehouse));
+                    showProgressDialog(getString(R.string.getting_employess));
                     //获取导购信息
                     loginViewModel.queryEmployeesInformation();
                 }

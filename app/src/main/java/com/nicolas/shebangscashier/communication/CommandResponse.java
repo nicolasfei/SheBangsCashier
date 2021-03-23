@@ -13,6 +13,7 @@ public class CommandResponse {
     public String msg = "";
     public int code = 0;
     public String data;
+    public String property;
     public String token;
     public String jsonData;
     public int total;
@@ -61,6 +62,9 @@ public class CommandResponse {
                 }
                 if (rep.has("saleTotalPrice")) {
                     this.saleTotalPrice = (float) rep.getDouble("saleTotalPrice");
+                }
+                if (rep.has("property")) {
+                    this.property = rep.getString("property");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

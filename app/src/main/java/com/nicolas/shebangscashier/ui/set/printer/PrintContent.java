@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
+import com.nicolas.shebangscashier.common.BarCodeInformation;
 import com.nicolas.shebangscashier.ui.cash.data.SaleGoodsInformation;
 import com.nicolas.shebangscashier.ui.cash.data.SettlementGoodsInformation;
 import com.printer.command.CpclCommand;
@@ -463,6 +464,16 @@ public class PrintContent {
         tv3.setTextSize(30);
         tb.addView(tv3);
         return tb;
+    }
+
+    /**
+     * 打印标签
+     *
+     * @param info 条码信息
+     * @return Vector
+     */
+    public static Vector<Byte> getBarcodeLabel(BarCodeInformation info) {
+        return null;
     }
 
     /**

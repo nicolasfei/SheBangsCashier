@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/barCode"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:text="条码：123456789012"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/state"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="状态：正常"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/color"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:text="颜色：红色"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/size"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="尺码：M"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:text="售价：￥100"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/source"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:text="来源：供应商"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/inStoreTime"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.15"
+            android:text="入库时间：2021-03-06 12：25"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/printTime"
+            style="@style/TextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0.15"
+            android:text="打印时间：2021-03-06 12：25"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+
+
+</LinearLayout>

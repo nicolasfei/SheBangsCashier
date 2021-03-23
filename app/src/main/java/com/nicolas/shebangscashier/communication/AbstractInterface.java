@@ -9,6 +9,8 @@ public abstract class AbstractInterface {
     private static final String TAG = "AbstractInterface";
     public static final String COMMAND_URL = "http://cashier.scdawn.com/";
 
+    public static final String MANAGE_URL = "http://cashierassist.scdawn.com/";
+
     private AbstractInterface nextHandler;
 
     public final String handleMessage(CommandVo vo) {

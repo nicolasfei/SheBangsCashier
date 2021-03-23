@@ -53,6 +53,8 @@
     <string name="activity_day_statistics">日销售统计</string>
     <string name="activity_new_goods_statistics">新货销售统计</string>
     <string name="activity_old_goods_statistics">旧货销售统计</string>
+    <string name="activity_inventory">盘点</string>
+    <string name="activity_inventory_goods">商品盘点</string>
 
     <!--导航-->
     <string name="nav_dev_manager">设备管理</string>
@@ -176,6 +178,7 @@
     <string name="querying">查询中...</string>
     <string name="branch">分店</string>
     <string name="colon">：</string>
+    <string name="colon_small">:</string>
     <string name="vip">会员</string>
     <string name="this_integral">本次积分</string>
     <string name="consume_integral">消费积分</string>
@@ -217,6 +220,7 @@
     <string name="goodsClass">类型</string>
     <string name="goodsId">新货号</string>
     <string name="sId">供应商编号</string>
+    <string name="sIdHid">编号</string>
     <string name="amount">库存</string>
     <string name="salePrice">售价</string>
     <string name="saleNum">数量</string>
@@ -247,4 +251,58 @@
     <string name="deductionIntegral">扣除积分</string>
     <string name="cashTime">收银日期</string>
     <string name="contentDescription">contentDescription</string>
+
+    <string name="codeStatus">条码状态</string>
+    <string name="normal">正常</string>
+    <string name="diaohuozhong">调货中</string>
+    <string name="diaohuoshic">调货市场</string>
+    <string name="isInventory">是否盘点</string>
+    <string name="notInventory">未盘点</string>
+    <string name="havInventory">已盘点</string>
+    <string name="storageTime">入库时间</string>
+    <string name="shop">店铺</string>
+    <string name="sId1">编号</string>
+    <string name="getTime">入库时间</string>
+    <string name="pdTime">盘点时间</string>
+    <string name="source">货物来源</string>
+    <string name="too_more">数据超过上限,请先提交！</string>
+    <string name="isHavDataNotProcessed">还有未处理的数据,确定要退出吗?</string>
+    <string name="transferStatus">调货状态</string>
+    <string name="Confirmed">已确认</string>
+    <string name="toBeConfirmed">待确认</string>
+    <string name="acceptanceShop">接受店铺</string>
+    <string name="transferTime">发起时间</string>
+    <string name="confirmationTime">确认时间</string>
+    <string name="input_acceptance">请输入店铺</string>
+    <string name="shopID">店铺编号</string>
+    <string name="getting_employess">获取导购信息中...</string>
+    <string name="receipt_input">请输入小票编号</string>
+
+    <!--other-->
+    <string name="intoStatus">进货状态</string>
+    <string name="all">全部</string>
+    <string name="Unreceived">未收货</string>
+    <string name="received">已收货</string>
+    <string name="oldGoodId">旧货号</string>
+    <string name="orderCode">订单号</string>
+    <string name="receiptTime">库房收货时间</string>
+    <string name="orderCodeInput">请输入订单号</string>
+    <string name="oldGoodsInput">请输入旧货号</string>
+    <string name="salePriceInput">请输入售价</string>
+    <string name="branchNumber">分店编号</string>
+    <string name="intoNum">进货量</string>
+    <string name="incomingStatus">进货状态</string>
+    <string name="number">编号</string>
+    <string name="confirm">确认收货</string>
+    <string name="store_receipt">收货</string>
+    <string name="storeReceiveTime">库房收货时间</string>
+    <string name="branchReceiveTime">分店收货时间</string>
+    <string name="negative">取消</string>
+    <string name="colorSize">颜色,尺码</string>
+    <string name="barcode">商品条码</string>
+    <string name="barCodeState">条码状态</string>
+    <string name="size">尺码</string>
+    <string name="inStoreTime">入库时间</string>
+    <string name="printTime">打印时间</string>
+    <string name="print_barcode">条码打印中...</string>
 </resources>

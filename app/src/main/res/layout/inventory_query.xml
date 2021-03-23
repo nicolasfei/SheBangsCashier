@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/goodsClassType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/goodsClassType"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/goodsClassTypeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sId"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/sId"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/sIdClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/goods_code"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/codeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/newGoods"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:drawableEnd="@drawable/ic_sr_blue"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/goodsId"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/newGoodsClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/isInventory"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <RadioGroup
+            android:id="@+id/isInventoryChip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.66"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp">
+
+            <RadioButton
+                android:id="@+id/isInventory0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/notInventory"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/isInventory1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/havInventory"
+                android:textSize="@dimen/drawer_text_size" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/isInventoryClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/codeStatus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/codeStatus"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <RadioGroup
+            android:id="@+id/codeStatusChip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.66"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp">
+
+            <RadioButton
+                android:id="@+id/codeStatusChip0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/normal"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/codeStatusChip1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="start|center"
+                android:text="@string/diaohuozhong"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/codeStatusChip2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:gravity="start|center"
+                android:text="@string/diaohuoshic"
+                android:textSize="@dimen/drawer_text_size" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/codeStatusClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/season"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/seasonName"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <RadioGroup
+            android:id="@+id/seasonChip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.66"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp">
+
+            <RadioButton
+                android:id="@+id/seasonChip0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/spring"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/seasonChip1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/summer"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/seasonChip2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/autumn"
+                android:textSize="@dimen/drawer_text_size" />
+
+            <RadioButton
+                android:id="@+id/seasonChip3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center"
+                android:text="@string/winter"
+                android:textSize="@dimen/drawer_text_size" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/seasonClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.19"
+            android:gravity="start|center"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="0dp"
+            android:text="@string/storageTime"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <TextView
+            android:id="@+id/storageTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.66"
+            android:background="@drawable/shape_rectangle_black"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:gravity="start|center"
+            android:hint="@string/choice_date"
+            android:paddingStart="@dimen/drawer_margin"
+            android:paddingEnd="@dimen/drawer_margin"
+            android:textSize="@dimen/drawer_text_size" />
+
+        <Button
+            android:id="@+id/storageTimeClear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/reset" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/query"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.15"
+            android:background="@android:color/holo_blue_bright"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="@string/query" />
+    </LinearLayout>
+</LinearLayout>
