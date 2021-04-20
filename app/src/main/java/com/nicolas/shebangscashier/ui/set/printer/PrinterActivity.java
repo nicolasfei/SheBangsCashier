@@ -5,6 +5,7 @@ import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,13 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.nicolas.printerlibraryforufovo.PrinterDevice;
 import com.nicolas.printerlibraryforufovo.PrinterDeviceGroup;
-import com.nicolas.shebangscashier.MyActivity;
+import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.common.OperateResult;
-import com.nicolas.toollibrary.Utils;
+import com.nicolas.printerlibraryforufovo.PrinterListAdapter;
+import com.nicolas.toollibrary.BruceDialog;
 
-public class PrinterActivity extends MyActivity {
+public class PrinterActivity extends BaseActivity implements View.OnClickListener {
 
     private PrinterListAdapter listAdapter;
     private RecyclerView mRecyclerView;
@@ -43,13 +46,7 @@ public class PrinterActivity extends MyActivity {
 
         printerViewModel = ViewModelProviders.of(this).get(PrinterViewModel.class);
 
-        search = findViewById(R.id.button9);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchBluetoothDevice();
-            }
-        });
+        search = findClickView(R.id.button9);
 
         //适配器
         listAdapter = new PrinterListAdapter(this);
@@ -57,7 +54,7 @@ public class PrinterActivity extends MyActivity {
         listAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
             @Override
             public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
-                printerViewModel.linkPrinter(groupPosition, childPosition);      //连接设备
+                printerViewModel.connectPrinter(groupPosition, childPosition);      //连接设备
             }
         });
         listAdapter.setOnPrinterOperationListener(new PrinterListAdapter.OnPrinterOperationListener() {
@@ -84,12 +81,27 @@ public class PrinterActivity extends MyActivity {
             public void onChanged(OperateResult queryResult) {
                 if (queryResult.getSuccess() != null) {
                     Message message = queryResult.getSuccess().getMessage();
-//                    listAdapter.notifyChildChanged(message.arg1, message.arg2);
+                    if (message!=null){
+                        switch (message.what){
+                            case PrinterDevice.CONNECT_STATUS:
+                                break;
+                            case PrinterDevice.REAL_STATUS:
+//                                Toast.makeText(PrinterActivity.this, (CharSequence) message.obj, Toast.LENGTH_SHORT).show();
+                                BruceDialog.showWarningDialog(PrinterActivity.this, (String) message.obj,null);
+                                break;
+                        }
+                    }
                     listAdapter.notifyDataChanged();
                 }
 
                 if (queryResult.getError() != null) {
-                    Utils.toast(PrinterActivity.this, queryResult.getError().getErrorMsg());
+                    BruceDialog.showAlertDialog(PrinterActivity.this, getString(R.string.failed),
+                            queryResult.getError().getErrorMsg(), new BruceDialog.OnAlertDialogListener() {
+                                @Override
+                                public void onSelect(boolean confirm) {
+
+                                }
+                            });
                     listAdapter.notifyGroupChanged((Integer) queryResult.getError().getParameter());
                 }
             }
@@ -121,6 +133,17 @@ public class PrinterActivity extends MyActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button9:
+                searchBluetoothDevice();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

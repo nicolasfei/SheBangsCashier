@@ -103,13 +103,9 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
         });
 
         findClickView(R.id.goodsClassTypeClear);
-        findClickView(R.id.sIdClear);
         findClickView(R.id.vipPhoneClear);
-        findClickView(R.id.codeInputClear);
-        findClickView(R.id.newGoodsClear);
         findClickView(R.id.receiptCodeClear);
         findClickView(R.id.payClear);
-        findClickView(R.id.seasonClear);
         findClickView(R.id.saleTimeClear);
         findClickView(R.id.reset);
         findClickView(R.id.query);

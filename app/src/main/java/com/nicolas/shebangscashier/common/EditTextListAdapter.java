@@ -1,8 +1,11 @@
 package com.nicolas.shebangscashier.common;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,43 +47,72 @@ public class EditTextListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(this.mContext).inflate(R.layout.goods_transfer_item, parent, false);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+//        final ViewHolder holder;
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(this.mContext).inflate(R.layout.text_edit_item, parent, false);
+//            holder = new ViewHolder(convertView);
+//            convertView.setTag(holder);
+//        } else {
+//            holder = (ViewHolder) convertView.getTag();
+//        }
+        View newView = LayoutInflater.from(this.mContext).inflate(R.layout.text_edit_item, parent, false);
+        final ViewHolder holder = new ViewHolder(newView);
 
         ReplenishmentInformation.Property s = properties.get(position);
 
-        String colorValue = "<font color=\"black\"><big>" + s.color + "," + s.size + "</big></font>";
-        holder.textView.setText(Html.fromHtml(colorValue, Html.FROM_HTML_MODE_COMPACT));
+        String colorValue = "<font color=\"black\">" + s.color + "</font>";
+        holder.color.setText(Html.fromHtml(colorValue, Html.FROM_HTML_MODE_COMPACT));
 
-        holder.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        String sizeValue = "<font color=\"black\">" + s.size + "</font>";
+        holder.size.setText(Html.fromHtml(sizeValue, Html.FROM_HTML_MODE_COMPACT));
+
+//        holder.num.setOnEditorActionListener(null);
+        holder.num.setText(s.val == 0 ? "" : String.valueOf(s.val));
+//        holder.num.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                Log.d("onEditorAction", "onEditorAction: actionId is "+actionId);
+//                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_NEXT) {
+//                    String num = holder.num.getText().toString();
+//                    if (!TextUtils.isEmpty(num)) {
+//                        s.val = Integer.parseInt(num);
+//                    }
+//                }
+//                return false;
+//            }
+//        });
+
+        holder.num.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-                    String num = holder.editText.getText().toString();
-                    if (!TextUtils.isEmpty(num)) {
-                        s.val = Integer.parseInt(num);
-                    }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String num = holder.num.getText().toString();
+                if (!TextUtils.isEmpty(num)) {
+                    s.val = Integer.parseInt(num);
                 }
-                return false;
             }
         });
 
-        return convertView;
+        return newView;
     }
 
     private static class ViewHolder {
-        private TextView textView;
-        private EditText editText;
+        private TextView color, size;
+        private EditText num;
 
         private ViewHolder(View root) {
-            this.textView = root.findViewById(R.id.textView);
-            this.editText = root.findViewById(R.id.editText);
+            this.color = root.findViewById(R.id.color);
+            this.size = root.findViewById(R.id.size);
+            this.num = root.findViewById(R.id.num);
         }
     }
 }

@@ -37,6 +37,18 @@ public class ManageCommand extends Command {
         ManageInterface orderByBranch = new OrderByBranch();
         //收货打印条码
         ManageInterface barCodeByOrderId = new BarCodeByOrderId();
+        //返货打印条码--查询
+        ManageInterface backGoodsPrint = new BackGoodsPrint();
+        //返货打印条码--查询
+        ManageInterface backGoodsPrintOK = new BackGoodsPrintOK();
+
+        //质检
+        ManageInterface qualityClass = new QualityClass();
+        ManageInterface qualityAdd = new QualityAdd();
+        ManageInterface quality = new Quality();
+        ManageInterface qualityById = new QualityById();
+        ManageInterface qualityDel = new QualityDel();
+        ManageInterface qualityByBarCodeId = new QualityByBarCodeId();
 
         goodsOrder.setNextHandler(inStock);
         inStock.setNextHandler(barCodeSearch);
@@ -59,7 +71,18 @@ public class ManageCommand extends Command {
         goodsByGoodsId.setNextHandler(orderByBranch);
         orderByBranch.setNextHandler(barCodeByOrderId);
         //收货打条码
-        barCodeByOrderId.setNextHandler(null);
+        barCodeByOrderId.setNextHandler(backGoodsPrint);
+        //返货打条码
+        backGoodsPrint.setNextHandler(backGoodsPrintOK);
+        backGoodsPrintOK.setNextHandler(qualityClass);
+
+        //质检
+        qualityClass.setNextHandler(qualityAdd);
+        qualityAdd.setNextHandler(quality);
+        quality.setNextHandler(qualityById);
+        qualityById.setNextHandler(qualityDel);
+        qualityDel.setNextHandler(qualityByBarCodeId);
+        qualityByBarCodeId.setNextHandler(null);
 
         super.firstNode = goodsOrder;
     }

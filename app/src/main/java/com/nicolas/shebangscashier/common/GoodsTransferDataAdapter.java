@@ -64,6 +64,14 @@ public class GoodsTransferDataAdapter extends BaseAdapter {
 
         String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.fIdFrom + "</big></font>";
         holder.shop.setText(Html.fromHtml(shopValue, Html.FROM_HTML_MODE_COMPACT));
+        holder.shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                    listener.onOperate2(position);
+                }
+            }
+        });
 
         String sIdValue = mContext.getString(R.string.sId1) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.sId + "</big></font>";
         holder.sId.setText(Html.fromHtml(sIdValue, Html.FROM_HTML_MODE_COMPACT));
@@ -100,6 +108,8 @@ public class GoodsTransferDataAdapter extends BaseAdapter {
 
     public interface OnOperateListener {
         void onOperate(int position);
+
+        void onOperate2(int position);
     }
 
     private static class ViewHolder {

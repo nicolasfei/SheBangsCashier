@@ -9,6 +9,18 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- sd卡:android 6.0以上需要动态申请权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!--蓝牙打印机-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--访问相机-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -164,6 +176,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.cash.ReturnGoodsActivity"
+            android:label="@string/activity_return_goods"
+            android:launchMode="singleTask"
+            android:theme="@style/NormalHeight"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.ReturnGoodsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!--管理-->
         <activity
             android:name=".ui.cash.StoreReceiptActivity"
@@ -204,10 +230,62 @@
         </activity>
 
         <activity
+            android:name=".ui.shopmanage.GoodsTransferActivity"
+            android:label="@string/activity_cashier_transfer_in"
+            android:launchMode="singleTask"
+            android:theme="@style/NormalHeight"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.GoodsTransferActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.shopmanage.ReceiveTransferActivity"
+            android:label="@string/activity_receive_transfer"
+            android:launchMode="singleTask"
+            android:theme="@style/NormalHeight"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.ReceiveTransferActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.shopmanage.ReturnPrintActivity"
+            android:label="@string/activity_return_print"
+            android:launchMode="singleTask"
+            android:theme="@style/NormalHeight"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.ReturnPrintActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.shopmanage.QualityManagementActivity"
+            android:label="@string/activity_quality_management"
+            android:launchMode="singleTask"
+            android:theme="@style/NormalHeight"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.QualityManagementActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".ui.set.printer.PrinterActivity"
             android:label="@string/activity_printer"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme"
+            android:theme="@style/NormalHeight"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.PrinterActivity" />

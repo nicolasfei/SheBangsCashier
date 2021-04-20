@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.nicolas.printerlibraryforufovo.PrinterDevice;
+import com.nicolas.printerlibraryforufovo.OnPrinterDeviceGroupStatusChangeListener;
 import com.nicolas.printerlibraryforufovo.PrinterDeviceGroup;
 import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.common.OperateInUserView;
@@ -18,6 +18,7 @@ public class PrinterViewModel extends ViewModel {
     private List<PrinterDeviceGroup> printerDeviceGroups;
     private boolean isSelfOpenOrCloseBluetooth = false;      //是否自己关闭或打开蓝牙
     private boolean isSelfStopScan = false;                  //是否自己停止蓝牙搜索
+
     private boolean isScanning = false;     //是否在扫描
 
     /**
@@ -45,7 +46,30 @@ public class PrinterViewModel extends ViewModel {
         printerGroupStatusResult = new MutableLiveData<>();
         printerStatusResult = new MutableLiveData<>();
         printerDeviceGroups = PrinterManager.getInstance().getPrinterGroup();
-        PrinterManager.getInstance().setOnPrinterStatusUpdateListener(listener);
+        for (int i = 0; i < printerDeviceGroups.size(); i++) {
+            PrinterDeviceGroup group = printerDeviceGroups.get(i);      //获得组
+            final int groupPosition = i;
+            group.setOnPrinterDeviceGroupStatusChangeListener(new OnPrinterDeviceGroupStatusChangeListener() {
+                @Override
+                public void printerDeviceGroupStatusChange(int statusID, int status) {
+                    Message msg = new Message();
+                    msg.what = statusID;
+                    msg.arg1 = groupPosition;
+                    msg.obj = (status==1);
+                    printerGroupStatusResult.setValue(new OperateResult(new OperateInUserView(msg)));
+                }
+
+                @Override
+                public void printerDeviceStatusChange(int childPosition, int deviceStatus, Object status) {
+                    Message msg = new Message();
+                    msg.what = deviceStatus;
+                    msg.arg1 = groupPosition;
+                    msg.arg2 = childPosition;
+                    msg.obj = status;
+                    printerStatusResult.setValue(new OperateResult(new OperateInUserView(msg)));
+                }
+            });
+        }
     }
 
     public LiveData<OperateResult> getPrinterGroupStatusResult() {
@@ -71,8 +95,8 @@ public class PrinterViewModel extends ViewModel {
      * @param groupPosition 组Position
      * @param childPosition 设备Position
      */
-    public void linkPrinter(int groupPosition, int childPosition) {
-        PrinterManager.getInstance().linkPrinter(groupPosition, childPosition);
+    public void connectPrinter(int groupPosition, int childPosition) {
+        PrinterManager.getInstance().connectPrinter(groupPosition, childPosition);
     }
 
     /**
@@ -82,64 +106,20 @@ public class PrinterViewModel extends ViewModel {
      * @param status        接口状态
      */
     public void setPrinterGroupInterface(int groupPosition, boolean status) {
-        PrinterManager.getInstance().setPrinterGroupInterface(groupPosition, status);
+        PrinterManager.getInstance().getPrinterGroup().get(groupPosition).setSwitchOC(status);
     }
 
     /**
      * 扫描打印机
      */
     public void scanPrinter() {
-        PrinterManager.getInstance().scanPrinter(PrinterDevice.LINK_TYPE_BLUETOOTH);
-        PrinterManager.getInstance().scanPrinter(PrinterDevice.LINK_TYPE_WIFI);
+        PrinterManager.getInstance().scanPrinter();
     }
-
-    /**
-     * 打印机监听
-     */
-    private PrinterManager.OnPrinterStatusUpdateListener listener = new PrinterManager.OnPrinterStatusUpdateListener() {
-
-        /**
-         * 打印机状态更新
-         * @param groupPosition 组ID
-         * @param childPosition 子ID
-         * @param statusType    状态类型
-         * @param change        状态类型
-         */
-        @Override
-        public void printerStatusUpdate(int groupPosition, int childPosition, int statusType, boolean change) {
-            Message msg = new Message();
-            msg.what = statusType;
-            msg.arg1 = groupPosition;
-            msg.arg2 = childPosition;
-            msg.obj = change;
-            printerStatusResult.setValue(new OperateResult(new OperateInUserView(msg)));
-        }
-
-        /**
-         * 打印机组的状态更新
-         * @param groupPosition 组ID
-         * @param statusType    状态类型
-         * @param change        状态改变
-         */
-        @Override
-        public void printerGroupStatusUpdate(int groupPosition, int statusType, boolean change) {
-            /**
-             * msg.arg1 打印机组ID
-             * msg.what 组的某个变量的状态
-             * msg.obj  状态的值
-             */
-            Message msg = new Message();
-            msg.arg1 = groupPosition;
-            msg.what = statusType;
-            msg.obj = change;
-            printerGroupStatusResult.setValue(new OperateResult(new OperateInUserView(msg)));
-        }
-    };
 
     /**
      * 注销
      */
     public void destroy() {
-        PrinterManager.getInstance().setOnPrinterStatusUpdateListener(null);
+
     }
 }

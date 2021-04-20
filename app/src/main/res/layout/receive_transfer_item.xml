@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25"
+        app:srcCompat="@mipmap/ico_big_decolor" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/photo"
+        app:layout_constraintTop_toTopOf="@+id/photo">
+
+        <TextView
+            android:id="@+id/shop"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:text="店铺：JM456"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/transferTime"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="发起时间：2020-11-06 13:11"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line11"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/photo"
+        app:layout_constraintTop_toBottomOf="@+id/line1">
+
+        <TextView
+            android:id="@+id/transferStatus"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:text="状态：已确认"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ConfirmationTime"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="确认时间：2020-11-06 13:11"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/photo"
+        app:layout_constraintTop_toBottomOf="@+id/line11">
+
+        <TextView
+            android:id="@+id/sId"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:text="编号：9050_ZG"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/code"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="条码：123654DSERTY"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2">
+
+        <TextView
+            android:id="@+id/newGoods"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="新货号：0101371"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/type"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="类型：半身裙"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/operate"
+            style="@style/TextViewStyleItem"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="打印"
+            android:textSize="14sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

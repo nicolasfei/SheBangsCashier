@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nicolas.printerlibraryforufovo.PrinterDevice;
 import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
@@ -72,7 +73,7 @@ public class SettlementDetailedViewModel extends ViewModel {
      */
     public void printerSaleBill() {
         try {
-            PrinterManager.getInstance().printBill(PrintContent.getSaleReceipt(new SettlementGoodsInformation(goodsInformationList, vip, payType, useIntegral, collection, change, totalCast, receiptCode)));
+            PrinterManager.getInstance().printBill(PrinterDevice.CONN_METHOD.BLUETOOTH, PrintContent.getSaleReceipt(new SettlementGoodsInformation(goodsInformationList, vip, payType, useIntegral, collection, change, totalCast, receiptCode)));
             printSaleBillResult.setValue(new OperateResult(new OperateInUserView(null)));
         } catch (IOException e) {
             e.printStackTrace();

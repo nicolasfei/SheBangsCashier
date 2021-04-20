@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nicolas.printerlibraryforufovo.PrinterDevice;
+import com.nicolas.printerlibraryforufovo.PrinterDeviceGroup;
 import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.app.MyApp;
 import com.nicolas.shebangscashier.app.LoginManager;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_sale,R.id.navigation_manage, R.id.navigation_set)
+                R.id.navigation_sale, R.id.navigation_manage, R.id.navigation_set)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         //---------------------------------初始化全局类--------------------------------------//
         //开启打印机连接任务
-        PrinterManager.getInstance().resetLinkDeviceModel(MyKeeper.getInstance().getBranch().fId);
+        PrinterManager.getInstance().setAppointDeviceName(PrinterDevice.CONN_METHOD.BLUETOOTH, PrinterDeviceGroup.ANY);
         PrinterManager.getInstance().init(MyApp.getInstance());
         //开启SupplierKeeper定时查询任务
         MyKeeper.getInstance().startTimerTask();

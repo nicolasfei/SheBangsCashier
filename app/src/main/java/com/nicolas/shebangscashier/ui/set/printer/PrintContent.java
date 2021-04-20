@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
 import com.nicolas.shebangscashier.common.BarCodeInformation;
+import com.nicolas.shebangscashier.common.StoreReceipt;
 import com.nicolas.shebangscashier.ui.cash.data.SaleGoodsInformation;
 import com.nicolas.shebangscashier.ui.cash.data.SettlementGoodsInformation;
 import com.printer.command.CpclCommand;
@@ -19,7 +20,9 @@ import com.printer.command.EscCommand;
 import com.printer.command.LabelCommand;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
@@ -170,11 +173,11 @@ public class PrintContent {
         return datas;
     }
 
-    private static final int RowHeight = 60;         //行高
-    private static final int RowStartOffset = 30;   //行起始偏移
-    private static final int LabelWidth = 750;       //标签宽
+    private static final int RowHeight = 20;         //行高
+    private static final int RowStartOffset = 140;   //行起始偏移
+    private static final int LabelWidth = 375;       //标签宽
     private static final int LabelHalfWidth = LabelWidth / 2;       //标签宽
-    private static final int LabelHeight = 750;      //标签高
+    private static final int LabelHeight = 300;      //标签高
     private static final int wordWidth = 25;         //字宽度
     private static final int halfWordWidth = wordWidth / 2;         //半字宽度
 
@@ -310,7 +313,7 @@ public class PrintContent {
     public static Vector<Byte> getLabel(String label) {
         LabelCommand tsc = new LabelCommand();
         // 设置标签尺寸宽高，按照实际尺寸设置 单位mm
-        tsc.addSize(50, 30);
+        tsc.addSize(50, 40);
         // 设置标签间隙，按照实际尺寸设置，如果为无间隙纸则设置为0 单位mm
         tsc.addGap(3);
         // 设置打印方向
@@ -466,14 +469,74 @@ public class PrintContent {
         return tb;
     }
 
+    public static Vector<Byte> getBarcodeLabel(BarCodeInformation info) {
+        return null;
+    }
+
     /**
      * 打印标签
      *
-     * @param info 条码信息
+     * @param receipt 条码信息
      * @return Vector
      */
-    public static Vector<Byte> getBarcodeLabel(BarCodeInformation info) {
-        return null;
+    public static List<Vector<Byte>> getGoodsLabel(StoreReceipt receipt) {
+        List<Vector<Byte>> vectors = new ArrayList<>();
+        for (StoreReceipt.PropertyRecord record : receipt.records) {
+            LabelCommand tsc = new LabelCommand();
+            /* 设置标签尺寸，按照实际尺寸设置 */
+            tsc.addSize(LabelWidth, LabelHeight);
+            /* 设置标签间隙，按照实际尺寸设置，如果为无间隙纸则设置为0 */
+            tsc.addGap(10);
+            /* 设置打印方向 */
+            tsc.addDirection(LabelCommand.DIRECTION.FORWARD, LabelCommand.MIRROR.NORMAL);
+            /* 开启带Response的打印，用于连续打印 */
+//        tsc.addQueryPrinterStatus(LabelCommand.RESPONSE_MODE.ON);
+            /* 撕纸模式开启 */
+            tsc.addTear(EscCommand.ENABLE.ON);
+            /* 清除打印缓冲区 */
+            tsc.addCls();
+
+            int contentStartY = 0;
+            //---------------------------第一行-------------------------//
+            /* 设置原点坐标 */
+            tsc.addReference(0, 0);
+            //订单条码
+            tsc.add1DBarcode(RowStartOffset, RowHeight / 3, LabelCommand.BARCODETYPE.CODE128, 60,
+                    LabelCommand.READABEL.EANBEL, LabelCommand.ROTATION.ROTATION_0, receipt.id);
+            contentStartY += 100;
+            //---------------------------第二行-------------------------//
+            /* 设置原点坐标 */
+            tsc.addReference(0, contentStartY);
+            //商店信息
+            tsc.addText(RowStartOffset, RowHeight, LabelCommand.FONTTYPE.SIMPLIFIED_CHINESE,
+                    LabelCommand.ROTATION.ROTATION_0, LabelCommand.FONTMUL.MUL_1, LabelCommand.FONTMUL.MUL_1,
+                    "怦然心动:9057 ZG-01229004");
+            contentStartY += RowHeight + 15;
+            //---------------------------第三行-------------------------//
+            /* 设置原点坐标 */
+            tsc.addReference(0, contentStartY);
+            //商店信息
+            tsc.addText(RowStartOffset, RowHeight, LabelCommand.FONTTYPE.SIMPLIFIED_CHINESE,
+                    LabelCommand.ROTATION.ROTATION_0, LabelCommand.FONTMUL.MUL_1, LabelCommand.FONTMUL.MUL_1,
+                    record.color + "/" + record.size + "码");
+            contentStartY += RowHeight + 15;
+            //---------------------------第四行-------------------------//
+            /* 设置原点坐标 */
+            tsc.addReference(0, contentStartY);
+            //商店信息
+            tsc.addText(RowStartOffset, RowHeight, LabelCommand.FONTTYPE.SIMPLIFIED_CHINESE,
+                    LabelCommand.ROTATION.ROTATION_0, LabelCommand.FONTMUL.MUL_1, LabelCommand.FONTMUL.MUL_1,
+                    "统一零售价：" + receipt.salePrice + "元");
+//            contentStartY += 80;
+
+            /* 打印标签 */
+            tsc.addPrint(1);
+
+            /* 打印标签后 蜂鸣器响 */
+            tsc.addSound(2, 100);
+            vectors.add(tsc.getCommand());
+        }
+        return vectors;
     }
 
     /**

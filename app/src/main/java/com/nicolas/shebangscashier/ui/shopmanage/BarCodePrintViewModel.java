@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nicolas.printerlibraryforufovo.PrinterDevice;
 import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
@@ -160,7 +161,7 @@ public class BarCodePrintViewModel extends ViewModel {
                 try {
                     for (BarCodeInformation info : dataList) {
                         if (info.isSelect) {
-                            PrinterManager.getInstance().printLabelBlue(PrintContent.getBarcodeLabel(info));
+                            PrinterManager.getInstance().printLabel(PrinterDevice.CONN_METHOD.BLUETOOTH, PrintContent.getBarcodeLabel(info));
                             try {
                                 Thread.sleep(200);
                             } catch (InterruptedException e) {

@@ -42,4 +42,22 @@ public abstract class ManageInterface extends AbstractInterface {
 
     //收货--打印条码
     public final static String BarCodeByOrderId = AbstractInterface.MANAGE_URL + "Goods/BarCodeByOrderId";
+
+    //返货--打印条码--查询
+    public final static String BackGoodsPrint = AbstractInterface.COMMAND_URL + "Cashier/BackGoodsPrint";
+    //返货--打印条码--打印
+    public final static String BackGoodsPrintOK = AbstractInterface.COMMAND_URL + "Cashier/BackGoodsPrintOK";
+
+    //质检--质检类别
+    public final static String QualityClass = AbstractInterface.MANAGE_URL + "Goods/QualityClass";
+    //质检--质检提交
+    public final static String QualityAdd = AbstractInterface.MANAGE_URL + "Goods/QualityAdd";
+    //质检--质检列表查询
+    public final static String Quality = AbstractInterface.MANAGE_URL + "Goods/Quality";
+    //质检--质检记录获取
+    public final static String QualityById = AbstractInterface.MANAGE_URL + "Goods/QualityById";
+    //质检--质检记录删除
+    public final static String QualityDel = AbstractInterface.MANAGE_URL + "Goods/QualityDel";
+    //质检--条码查询
+    public final static String QualityByBarCodeId = AbstractInterface.MANAGE_URL + "Goods/QualityByBarCodeId";
 }

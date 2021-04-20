@@ -55,6 +55,11 @@
     <string name="activity_old_goods_statistics">旧货销售统计</string>
     <string name="activity_inventory">盘点</string>
     <string name="activity_inventory_goods">商品盘点</string>
+    <string name="activity_cashier_transfer_in">发起调货</string>
+    <string name="activity_receive_transfer">接收调货</string>
+    <string name="activity_return_print">返货条码打印</string>
+    <string name="activity_quality_management">质检管理</string>
+    <string name="activity_return_goods">商品退货</string>
 
     <!--导航-->
     <string name="nav_dev_manager">设备管理</string>
@@ -67,8 +72,8 @@
     <string name="nav_cashier_inventory">盘点</string>
     <string name="nav_cashier_inventory_query">盘点查询</string>
     <string name="nav_cashier_receiver">收货</string>
-    <string name="nav_cashier_transfer_in">调入货</string>
-    <string name="nav_cashier_transfer_out">调出货</string>
+    <string name="nav_cashier_transfer_in">发起调货</string>
+    <string name="nav_cashier_transfer_out">接收调货</string>
     <string name="nav_cashier_bill_query">小票查询</string>
     <string name="nav_cashier_vip_query">会员查询</string>
     <string name="nav_cashier_new_sales_query">新货销售记录</string>
@@ -305,4 +310,25 @@
     <string name="inStoreTime">入库时间</string>
     <string name="printTime">打印时间</string>
     <string name="print_barcode">条码打印中...</string>
+    <string name="branchCodeInputAttention">分店编号，注意\".\"的输入</string>
+    <string name="transferCode">调货条码</string>
+    <string name="inputCodePlease">请输入调货条码</string>
+    <string name="submitAll">全部提交</string>
+    <string name="submitSuccess">提交成功</string>
+    <string name="choiceFidFirst">请先选择分店</string>
+    <string name="input_fid">分店选择</string>
+    <string name="isDelete">确定要删除吗？</string>
+    <string name="deleteing">数据删除中...</string>
+    <string name="InitiatingShop">发起店铺</string>
+    <string name="area">区域</string>
+    <string name="searching">搜索中...</string>
+    <string name="registerTime">登记时间</string>
+    <string name="qualityRegister">质检登记</string>
+    <string name="codeInput">请输入编号</string>
+    <string name="goodsCode">商品条码</string>
+    <string name="id">编号</string>
+    <string name="qualityClassName">问题分类</string>
+    <string name="remark">补充描述</string>
+    <string name="nav_quality_managemeng">质检管理</string>
+    <string name="failed">失败</string>
 </resources>

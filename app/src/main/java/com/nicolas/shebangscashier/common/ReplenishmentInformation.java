@@ -1,5 +1,7 @@
 package com.nicolas.shebangscashier.common;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,10 +136,10 @@ public class ReplenishmentInformation {
                     this.size = object.getString("size");
                 }
                 if (object.has("val")) {
-                    this.val = object.getInt("val");
+                    this.val = object.optInt("val", 0);
                 }
                 if (object.has("orderVal")) {
-                    this.orderVal = object.getInt("orderVal");
+                    this.orderVal = object.optInt("orderVal", 0);
                 }
                 if (object.has("createTime")) {
                     this.createTime = object.getString("createTime");
