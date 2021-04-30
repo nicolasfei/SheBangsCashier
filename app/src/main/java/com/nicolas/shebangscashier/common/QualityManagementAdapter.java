@@ -76,29 +76,29 @@ public class QualityManagementAdapter extends BaseAdapter {
         });
 
 
-        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.fId + "</big></font>";
-        holder.shop.setText(Html.fromHtml(shopValue, Html.FROM_HTML_MODE_COMPACT));
+        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) +  s.fId ;
+        holder.shop.setText(shopValue);
 
-        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.seasonName + "</big></font>";
-        holder.seasonName.setText(Html.fromHtml(seasonNameValue, Html.FROM_HTML_MODE_COMPACT));
+        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon) +  s.seasonName ;
+        holder.seasonName.setText(seasonNameValue);
 
-        String qualityClassNameValue = mContext.getString(R.string.qualityClassName) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.qualityClassName + "</big></font>";
-        holder.qualityClassName.setText(Html.fromHtml(qualityClassNameValue, Html.FROM_HTML_MODE_COMPACT));
+        String qualityClassNameValue = mContext.getString(R.string.qualityClassName) + mContext.getString(R.string.colon) +  s.qualityClassName ;
+        holder.qualityClassName.setText(qualityClassNameValue);
 
-        String remarkValue = mContext.getString(R.string.remark) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.reason + "</big></font>";
-        holder.remark.setText(Html.fromHtml(remarkValue, Html.FROM_HTML_MODE_COMPACT));
+        String remarkValue = mContext.getString(R.string.remark) + mContext.getString(R.string.colon) +  s.reason ;
+        holder.remark.setText(remarkValue);
 
-        String ConfirmationTimeValue = mContext.getString(R.string.confirmationTime) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.createTime + "</big></font>";
-        holder.ConfirmationTime.setText(Html.fromHtml(ConfirmationTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String ConfirmationTimeValue = mContext.getString(R.string.confirmationTime) + mContext.getString(R.string.colon) +  s.createTime ;
+        holder.ConfirmationTime.setText(ConfirmationTimeValue);
 
-        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsId + "</big></font>";
-        holder.newGoods.setText(Html.fromHtml(goodsIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) +  s.goodsId ;
+        holder.newGoods.setText(goodsIdValue);
 
-        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.barCodeId + "</big></font>";
-        holder.code.setText(Html.fromHtml(codeValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) +  s.barCodeId ;
+        holder.code.setText(codeValue);
 
-        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsClassName + "</big></font>";
-        holder.type.setText(Html.fromHtml(goodsClassValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) +  s.goodsClassName ;
+        holder.type.setText(goodsClassValue);
 
         holder.operate.setOnClickListener(new View.OnClickListener() {
             @Override

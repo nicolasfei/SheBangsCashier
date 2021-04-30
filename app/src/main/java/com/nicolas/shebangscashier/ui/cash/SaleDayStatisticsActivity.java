@@ -54,7 +54,7 @@ public class SaleDayStatisticsActivity extends BaseActivity implements View.OnCl
                 viewModel.query();
             }
         });
-        View head = LayoutInflater.from(this).inflate(R.layout.sale_statistics_item,null, false);
+        View head = LayoutInflater.from(this).inflate(R.layout.sale_statistics_item, null, false);
         TextView v1 = head.findViewById(R.id.item1);
         v1.setText("商品类别");
         TextView v2 = head.findViewById(R.id.item2);
@@ -126,20 +126,20 @@ public class SaleDayStatisticsActivity extends BaseActivity implements View.OnCl
 
     private void updateDate() {
         //数量合计
-        String numCountValue = getString(R.string.num_count) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsNumCount() + "</big></font>";
-        this.numCount.setText(Html.fromHtml(numCountValue, Html.FROM_HTML_MODE_COMPACT));
+        String numCountValue = getString(R.string.num_count) + getString(R.string.colon_zh) + viewModel.getGoodsNumCount();
+        this.numCount.setText(numCountValue);
 
         //收款合计
-        String cashCountValue = getString(R.string.total_cash) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsCashCount() + "</big></font>";
-        this.cashCount.setText(Html.fromHtml(cashCountValue, Html.FROM_HTML_MODE_COMPACT));
+        String cashCountValue = getString(R.string.total_cash) + getString(R.string.colon_zh) + viewModel.getGoodsCashCount();
+        this.cashCount.setText(cashCountValue);
 
         //积分使用
-        String integralValue = getString(R.string.intergeralUse) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsIntegralCount() + "</big></font>";
-        this.integral.setText(Html.fromHtml(integralValue, Html.FROM_HTML_MODE_COMPACT));
+        String integralValue = getString(R.string.intergeralUse) + getString(R.string.colon_zh) + viewModel.getGoodsIntegralCount();
+        this.integral.setText(integralValue);
 
         //抵扣金额
-        String deductionValue = getString(R.string.intergeralDeduction) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsDeductionCount() + "</big></font>";
-        this.deduction.setText(Html.fromHtml(deductionValue, Html.FROM_HTML_MODE_COMPACT));
+        String deductionValue = getString(R.string.intergeralDeduction) + getString(R.string.colon_zh) + viewModel.getGoodsDeductionCount();
+        this.deduction.setText(deductionValue);
 
         this.adapter.notifyDataSetChanged();
 

@@ -19,8 +19,24 @@ public class ReturnGoodsInformation {
 
     public String json;
 
-    public ReturnGoodsInformation() {
-
+    public JSONObject getJson() {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("id",this.id);
+            object.put("goodsClassName",this.goodsClassName);
+            object.put("goodsClassId",this.goodsClassId);
+            object.put("amount",Math.abs(this.amount));
+            object.put("price",this.price);
+            object.put("totalPrice",this.totalPrice);
+            object.put("deductionIntegral",this.deductionIntegral);
+            object.put("balanceIntegral",this.balanceIntegral);
+            object.put("isIntegral",this.isIntegral);
+            object.put("memberTel",this.memberTel);
+            object.put("memberId",this.memberId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 
     public ReturnGoodsInformation(String json) {
@@ -63,9 +79,5 @@ public class ReturnGoodsInformation {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getJsonString() {
-        return this.json;
     }
 }

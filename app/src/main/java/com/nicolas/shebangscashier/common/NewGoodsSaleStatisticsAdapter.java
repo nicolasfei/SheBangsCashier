@@ -58,29 +58,29 @@ public class NewGoodsSaleStatisticsAdapter extends BaseAdapter {
             ImageLoadClass.getInstance().displayImage(s.img, holder.photo, true);
         }
 
-        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.code + "</big></font>";
-        holder.code.setText(Html.fromHtml(codeValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) + s.code;
+        holder.code.setText(codeValue);
 
-        String sIdValue = mContext.getString(R.string.sId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.sId + "</big></font>";
-        holder.sId.setText(Html.fromHtml(sIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String sIdValue = mContext.getString(R.string.sId) + mContext.getString(R.string.colon) + s.sId;
+        holder.sId.setText(sIdValue);
 
-        String amountValue = mContext.getString(R.string.amount) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.amount + "</big></font>";
-        holder.amount.setText(Html.fromHtml(amountValue, Html.FROM_HTML_MODE_COMPACT));
+        String amountValue = mContext.getString(R.string.amount) + mContext.getString(R.string.colon) + s.amount;
+        holder.amount.setText(amountValue);
 
-        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.seasonName + "</big></font>";
-        holder.season.setText(Html.fromHtml(seasonNameValue, Html.FROM_HTML_MODE_COMPACT));
+        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon) + s.seasonName;
+        holder.season.setText(seasonNameValue);
 
-        String priceValue = mContext.getString(R.string.salePrice) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.saleTotalPrice + "</big></font>";
-        holder.price.setText(Html.fromHtml(priceValue, Html.FROM_HTML_MODE_COMPACT));
+        String priceValue = mContext.getString(R.string.salePrice) + mContext.getString(R.string.colon) + s.saleTotalPrice;
+        holder.price.setText(priceValue);
 
-        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsId + "</big></font>";
-        holder.newGoods.setText(Html.fromHtml(goodsIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + s.goodsId;
+        holder.newGoods.setText(goodsIdValue);
 
-        String saleNumValue = mContext.getString(R.string.saleNum) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.saleNum + "</big></font>";
-        holder.saleNum.setText(Html.fromHtml(saleNumValue, Html.FROM_HTML_MODE_COMPACT));
+        String saleNumValue = mContext.getString(R.string.saleNum) + mContext.getString(R.string.colon) + s.saleNum;
+        holder.saleNum.setText(saleNumValue);
 
-        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsClassName + "</big></font>";
-        holder.type.setText(Html.fromHtml(goodsClassValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + s.goodsClassName;
+        holder.type.setText(goodsClassValue);
 
         return convertView;
     }

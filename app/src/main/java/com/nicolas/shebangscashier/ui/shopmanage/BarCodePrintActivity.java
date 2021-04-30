@@ -18,8 +18,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nicolas.componentlibrary.pullrefreshswipemenu.PullRefreshSwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+//import com.nicolas.scannerlibrary.PPdaScanner;
+//import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.common.BarCodeInformation;
@@ -33,7 +33,7 @@ public class BarCodePrintActivity extends BaseActivity implements View.OnClickLi
     private CheckBox checkAll;
     private Button print;
     private EditText barCode;
-    private Scanner scanner;                //扫描头
+//    private Scanner scanner;                //扫描头
 
     private BarCodePrintAdapter adapter;
     private BarCodePrintViewModel viewModel;
@@ -45,15 +45,15 @@ public class BarCodePrintActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_print_barcode);
         this.viewModel = new ViewModelProvider(this).get(BarCodePrintViewModel.class);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerBarCodeInput(scan);
-            }
-        });
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerBarCodeInput(scan);
+//            }
+//        });
 
         this.barCode = findViewById(R.id.barCode);
         this.barCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {

@@ -27,6 +27,8 @@ public class FirstActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.KILL_BACKGROUND_PROCESSES,
             Manifest.permission.CAMERA,
+            Manifest.permission.VIBRATE,
+//            Manifest.permission.smartpos.deviceservice.permission.Printer,
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
 

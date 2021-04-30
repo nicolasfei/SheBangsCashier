@@ -1,8 +1,8 @@
 package com.nicolas.shebangscashier.ui.shopmanage;
 
 import com.nicolas.componentlibrary.datetimepicker.DateTimePickerDialog;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+//import com.nicolas.scannerlibrary.PPdaScanner;
+//import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
@@ -41,7 +41,7 @@ public class QualityManagementActivity extends BaseActivity implements View.OnCl
     private QualityManagementViewModel viewModel;
 
     private EditText goodsCode;
-    private Scanner scanner;                        //扫描头
+//    private Scanner scanner;                        //扫描头
 
     private GoodsInventoryAdapter adapter;
 
@@ -58,15 +58,15 @@ public class QualityManagementActivity extends BaseActivity implements View.OnCl
         this.updateUser();
         this.numCount = findViewById(R.id.numCount);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerBarCodeInput(scan);
-            }
-        });
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerBarCodeInput(scan);
+//            }
+//        });
         this.goodsCode = findViewById(R.id.goods_code);
         this.goodsCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

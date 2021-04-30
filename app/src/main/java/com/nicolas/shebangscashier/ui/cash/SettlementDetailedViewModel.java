@@ -72,12 +72,9 @@ public class SettlementDetailedViewModel extends ViewModel {
      * 打印小票
      */
     public void printerSaleBill() {
-        try {
-            PrinterManager.getInstance().printBill(PrinterDevice.CONN_METHOD.BLUETOOTH, PrintContent.getSaleReceipt(new SettlementGoodsInformation(goodsInformationList, vip, payType, useIntegral, collection, change, totalCast, receiptCode)));
-            printSaleBillResult.setValue(new OperateResult(new OperateInUserView(null)));
-        } catch (IOException e) {
-            e.printStackTrace();
-            printSaleBillResult.setValue(new OperateResult(new OperateError(0, MyApp.getInstance().getString(R.string.printer_no_link), null)));
-        }
+        SettlementGoodsInformation inf = new SettlementGoodsInformation(goodsInformationList,
+                vip, payType, useIntegral, collection, change, totalCast, receiptCode);
+        PrinterManager.getInstance().printPosBill(PrintContent.getSaleReceipt(MyApp.getInstance(), inf));
+        printSaleBillResult.setValue(new OperateResult(new OperateInUserView(null)));
     }
 }

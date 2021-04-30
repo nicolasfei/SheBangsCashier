@@ -62,37 +62,37 @@ public class GoodsTransferDataAdapter extends BaseAdapter {
             ImageLoadClass.getInstance().displayImage(s.img, holder.photo, true);
         }
 
-        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.fIdFrom + "</big></font>";
-        holder.shop.setText(Html.fromHtml(shopValue, Html.FROM_HTML_MODE_COMPACT));
+        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) + s.fIdFrom;
+        holder.shop.setText(shopValue);
         holder.shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener!=null){
+                if (listener != null) {
                     listener.onOperate2(position);
                 }
             }
         });
 
-        String sIdValue = mContext.getString(R.string.sId1) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.sId + "</big></font>";
-        holder.sId.setText(Html.fromHtml(sIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String sIdValue = mContext.getString(R.string.sId1) + mContext.getString(R.string.colon) + s.sId;
+        holder.sId.setText(sIdValue);
 
-        String transferTimeValue = mContext.getString(R.string.transferTime) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.transferTime + "</big></font>";
-        holder.transferTime.setText(Html.fromHtml(transferTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String transferTimeValue = mContext.getString(R.string.transferTime) + mContext.getString(R.string.colon) + s.transferTime;
+        holder.transferTime.setText(transferTimeValue);
 
-        String transferStatusValue = mContext.getString(R.string.transferStatus) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.state + "</big></font>";
-        holder.transferStatus.setText(Html.fromHtml(transferStatusValue, Html.FROM_HTML_MODE_COMPACT));
+        String transferStatusValue = mContext.getString(R.string.transferStatus) + mContext.getString(R.string.colon) + s.state;
+        holder.transferStatus.setText(transferStatusValue);
 
-        String ConfirmationTimeValue = mContext.getString(R.string.confirmationTime) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.okTime + "</big></font>";
-        holder.ConfirmationTime.setText(Html.fromHtml(ConfirmationTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String ConfirmationTimeValue = mContext.getString(R.string.confirmationTime) + mContext.getString(R.string.colon) + s.okTime;
+        holder.ConfirmationTime.setText(ConfirmationTimeValue);
 
-        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsId + "</big></font>";
-        holder.newGoods.setText(Html.fromHtml(goodsIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + s.goodsId;
+        holder.newGoods.setText(goodsIdValue);
 
-        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.b_b_BarCode_Id + "</big></font>";
-        holder.code.setText(Html.fromHtml(codeValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon) + s.b_b_BarCode_Id;
+        holder.code.setText(codeValue);
 
-        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsClassName + "</big></font>";
-        holder.type.setText(Html.fromHtml(goodsClassValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + s.goodsClassName;
+        holder.type.setText(goodsClassValue);
 
         holder.operate.setOnClickListener(new View.OnClickListener() {
             @Override

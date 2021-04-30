@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
 import com.nicolas.shebangscashier.common.GoodsInformation;
@@ -15,11 +16,14 @@ import com.nicolas.shebangscashier.communication.CommandTypeEnum;
 import com.nicolas.shebangscashier.communication.CommandVo;
 import com.nicolas.shebangscashier.communication.Invoker;
 import com.nicolas.shebangscashier.communication.sale.SaleInterface;
+import com.nicolas.shebangscashier.ui.cash.data.SettlementGoodsInformation;
+import com.nicolas.shebangscashier.ui.set.printer.PrintContent;
 import com.nicolas.toollibrary.HttpHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

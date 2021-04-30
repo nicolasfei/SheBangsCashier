@@ -2,10 +2,8 @@ package com.nicolas.shebangscashier.ui.cash;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.text.Html;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,7 +47,6 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
     private NewGoodsSaleStatisticsViewModel viewModel;
 
     private boolean isPayChipClear = false;
-    private boolean isSeasonChipClear = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -119,6 +116,7 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
                     Message msg = operateResult.getSuccess().getMessage();
                     if (msg != null) {
                         BruceDialog.showPromptDialog(OldGoodsSaleStatisticsActivity.this, (String) msg.obj);
+                        dismissProgressDialog();
                     } else {
                         viewModel.queryStatistics();
                     }
@@ -162,7 +160,7 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.new_goods_statistics_menu, menu);
+        inflater.inflate(R.menu.old_goods_statistics_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -171,7 +169,11 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.menu_screen:
-                this.drawerLayout.openDrawer(GravityCompat.END);
+                if (!this.drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                    this.drawerLayout.openDrawer(GravityCompat.END);
+                } else {
+                    this.drawerLayout.closeDrawer(GravityCompat.END, true);
+                }
                 break;
             default:
                 break;
@@ -217,7 +219,7 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
                 break;
             case R.id.query:
                 if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                    drawerLayout.closeDrawer(Gravity.RIGHT, true);
+                    drawerLayout.closeDrawer(GravityCompat.END, true);
                 }
                 query();
                 break;
@@ -254,8 +256,8 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
      * @param itemValue 商品类型
      */
     private void updateGoodsClassType(String itemValue) {
-        String value = getString(R.string.goodsClassType) + "\u3000\u3000\u3000\u3000\u3000" + "<font color=\"black\">" + itemValue + "</font>";
-        goodsClassType.setText(Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT));
+        String value = getString(R.string.goodsClassType) + "\u3000" + itemValue;
+        goodsClassType.setText(value);
     }
 
     /**
@@ -309,8 +311,8 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
     }
 
     private void updateVipPhone(String itemValue) {
-        String value = getString(R.string.vipPhone) + "\u3000\u3000\u3000\u3000\u3000" + "<font color=\"black\">" + itemValue + "</font>";
-        vipPhone.setText(Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT));
+        String value = getString(R.string.vipPhone) + "\u3000" + itemValue;
+        vipPhone.setText(value);
     }
 
     private void vipPhoneClear() {
@@ -319,8 +321,8 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
     }
 
     private void updateReceiptCode(String itemValue) {
-        String value = getString(R.string.receipt) + "\u3000\u3000\u3000\u3000\u3000" + "<font color=\"black\">" + itemValue + "</font>";
-        receiptCode.setText(Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT));
+        String value = getString(R.string.receipt) + "\u3000" + itemValue;
+        receiptCode.setText(value);
     }
 
     private void receiptCodeClear() {
@@ -347,7 +349,7 @@ public class OldGoodsSaleStatisticsActivity extends BaseActivity implements View
         DateTimePickerDialog.showDateSlotPickerDialog(OldGoodsSaleStatisticsActivity.this, start, end, new DateTimePickerDialog.OnDateTimeSlotPickListener() {
             @Override
             public void OnDateTimeSlotPick(String start, String end) {
-                updateSaleTime((start + "\u3000~\u3000" + end));
+                updateSaleTime((start + "\u3000~\u3000\u3000\u3000" + end));
                 viewModel.getCondition().setSaleTime((start + "~" + end));
             }
         });

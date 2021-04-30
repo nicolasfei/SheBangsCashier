@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+//import com.nicolas.scannerlibrary.PPdaScanner;
+//import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
@@ -27,7 +27,7 @@ public class ReturnPrintActivity extends BaseActivity implements View.OnClickLis
     private ReturnPrintViewModel viewModel;
     private TextView user;
     private EditText goodsCode;
-    private Scanner scanner;                        //扫描头
+//    private Scanner scanner;                        //扫描头
 
     private TextView goodsCodeValue, goodsID, goodsClass, goodsCodeStatus;
     private TextView branch, price, id;
@@ -41,15 +41,15 @@ public class ReturnPrintActivity extends BaseActivity implements View.OnClickLis
         this.user = findClickView(R.id.user);
         this.updateUser();
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerBarCodeInput(scan);
-            }
-        });
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerBarCodeInput(scan);
+//            }
+//        });
         this.goodsCode = findViewById(R.id.goods_code);
         this.goodsCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

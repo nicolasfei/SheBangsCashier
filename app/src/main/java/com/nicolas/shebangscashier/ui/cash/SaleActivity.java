@@ -1,18 +1,25 @@
 package com.nicolas.shebangscashier.ui.cash;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -22,22 +29,28 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.nicolas.printerlibraryforufovo.PrinterDevice;
+import com.nicolas.printerlibraryforufovo.PrinterManager;
+import com.nicolas.scannerlibrary.CameraScanner;
 import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.MyActivity;
 import com.nicolas.shebangscashier.R;
+import com.nicolas.shebangscashier.ScanActivity;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
 import com.nicolas.shebangscashier.common.OperateResult;
 import com.nicolas.shebangscashier.ui.cash.data.OldSaleDialog;
 import com.nicolas.shebangscashier.ui.cash.data.SaleGoodsInformation;
 import com.nicolas.shebangscashier.ui.cash.data.SaleGoodsInformationAdapter;
+import com.nicolas.shebangscashier.ui.set.printer.PrintContent;
 import com.nicolas.toollibrary.BruceDialog;
 import com.nicolas.toollibrary.Tool;
 import com.nicolas.toollibrary.Utils;
 
 
 public class SaleActivity extends MyActivity implements View.OnClickListener {
-
+    private String TAG = "SaleActivity";
     private SaleGoodsInformationAdapter goodsAdapter;
     private EditText codeInput;             //条码输入
     private Scanner scanner;                //扫描头
@@ -49,34 +62,15 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
 
     private String lastCode = "";           //上一次条码输入
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
         viewModel = new ViewModelProvider(this).get(SaleViewModel.class);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerScanResultInBroadcast(scan);
-            }
-        });
         //codeInput
         this.codeInput = findViewById(R.id.codeInput);
-        //按键监听方式
-        this.codeInput.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (KeyEvent.KEYCODE_ENTER == keyCode && event.getAction() == KeyEvent.ACTION_UP) {
-                    handlerScanResultInKeyListen(codeInput.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
         this.codeInput.requestFocus();
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -102,6 +96,8 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
                 return false;
             }
         });
+        //扫描按钮
+        findClickView(R.id.scan);
 
         //收银员
         salesperson = findClickView(R.id.salesperson);
@@ -195,6 +191,31 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
         checkSettlement();
     }
 
+    /**
+     * 初始化激光扫描头
+     */
+    private void initScanForPDA() {
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerScanResultInBroadcast(scan);
+//            }
+//        });
+        //按键监听方式
+        this.codeInput.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (KeyEvent.KEYCODE_ENTER == keyCode && event.getAction() == KeyEvent.ACTION_UP) {
+                    handlerScanResultInKeyListen(codeInput.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 
     /**
      * 处理扫描结果--广播方式
@@ -213,15 +234,8 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
      * @param scan 扫描结果
      */
     private void handlerScanResultInKeyListen(String scan) {
-        String currCode;
-        if (!TextUtils.isEmpty(lastCode)) {
-            currCode = scan.substring(0, scan.length() - lastCode.length());
-        } else {
-            currCode = scan;
-        }
-        codeInput.setText(currCode);
-        lastCode = currCode;
-        queryCodeInformation(currCode);
+        codeInput.setText(scan);
+        queryCodeInformation(scan);
     }
 
     /**
@@ -290,13 +304,11 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        scanner.scannerOpen();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        scanner.scannerSuspend();
     }
 
     @Override
@@ -314,16 +326,32 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
                 //结算
                 saleSettlement();
                 break;
+            case R.id.scan:
+                onScanBarcode();
+                break;
             default:
                 break;
         }
     }
 
     /**
+     * 调用zxing扫描条形码
+     */
+    public void onScanBarcode() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setCaptureActivity(ScanActivity.class);  //如果不需要竖屏显示 ，忽略这个
+        integrator.setPrompt("扫描条形码");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.initiateScan();
+    }
+
+    /**
      * 更新收银员
      */
     private void updateSalesperson() {
-            this.salesperson.setText(MyKeeper.getInstance().getStaff().name);
+        this.salesperson.setText(MyKeeper.getInstance().getStaff().name);
     }
 
     /**
@@ -374,25 +402,41 @@ public class SaleActivity extends MyActivity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode != 2) {
-            return;
-        }
-        switch (resultCode) {
-            case 0:
-                break;
-            case 1:     //收银完成，开始新的收银
-                codeInput.setText("");
-                viewModel.startNewCashier();
+        switch (requestCode) {
+            case 2:
+                switch (resultCode) {
+                    case 0:
+                        break;
+                    case 1:     //收银完成，开始新的收银
+                        codeInput.setText("");
+                        viewModel.startNewCashier();
+                        goodsAdapter.notifyDataSetChanged();
+                        checkSettlement();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
+                IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                if (result != null) {
+                    if (result.getContents() == null) {
+                        Toast.makeText(this, "扫码取消！", Toast.LENGTH_LONG).show();
+                    } else {
+                        handlerScanResultInKeyListen(result.getContents());
+                    }
+                }
                 break;
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     protected void onDestroy() {
-//        scanner.scannerClose();
+        if (scanner != null) {
+            scanner.scannerClose();
+        }
         super.onDestroy();
     }
 }

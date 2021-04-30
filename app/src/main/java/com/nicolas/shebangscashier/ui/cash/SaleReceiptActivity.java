@@ -1,9 +1,9 @@
 package com.nicolas.shebangscashier.ui.cash;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -21,22 +22,26 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.nicolas.printerlibraryforufovo.PrinterManager;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
+import com.nicolas.shebangscashier.ScanActivity;
+import com.nicolas.shebangscashier.app.MyApp;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
 import com.nicolas.shebangscashier.common.GoodsInformationAdapter;
 import com.nicolas.shebangscashier.common.OperateResult;
-import com.nicolas.shebangscashier.communication.sale.SaleReceipt;
+import com.nicolas.shebangscashier.ui.set.printer.PrintContent;
 import com.nicolas.toollibrary.BruceDialog;
 import com.nicolas.toollibrary.Tool;
 import com.nicolas.toollibrary.VibratorUtil;
 
+
 public class SaleReceiptActivity extends BaseActivity implements View.OnClickListener {
 
     private SaleReceiptViewModel viewModel;
-    private PPdaScanner scanner;
+    //    private PPdaScanner scanner;
     private TextView user;
     private TextView receipt;
     private EditText code;
@@ -53,13 +58,17 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
         this.viewModel = new ViewModelProvider(this).get(SaleReceiptViewModel.class);
 
         //初始化扫描头
-        this.scanner = new PPdaScanner(this);
-        this.scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerCodeInput(scan);
-            }
-        });
+//        this.scanner = new PPdaScanner(this);
+//        this.scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerCodeInput(scan);
+//            }
+//        });
+
+        //扫描按钮
+        findClickView(R.id.scan);
+
         //初始化组件View
         user = findClickView(R.id.user);
         updateUser();
@@ -191,13 +200,13 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        scanner.scannerOpen();
+//        scanner.scannerOpen();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        scanner.scannerSuspend();
+//        scanner.scannerSuspend();
     }
 
     /**
@@ -228,7 +237,7 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
      * @param value 条码
      */
     private void handlerCodeInput(String value) {
-        code.setText("");
+        code.setText(value);
         showProgressDialog(getString(R.string.querying));
         viewModel.queryCode(value);
     }
@@ -237,11 +246,11 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
      * 合计更新
      */
     private void updateCount() {
-        String numCountValue = getString(R.string.num) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsCount() + "</big></font>";
-        this.numCount.setText(Html.fromHtml(numCountValue, Html.FROM_HTML_MODE_COMPACT));
+        String numCountValue = getString(R.string.num) + getString(R.string.colon_zh) + viewModel.getGoodsCount();
+        this.numCount.setText(numCountValue);
 
-        String priceCountValue = getString(R.string.total_price) + getString(R.string.colon_zh) + "<font color=\"black\"><big>" + viewModel.getGoodsTotalPrice() + "</big></font>";
-        this.priceCount.setText(Html.fromHtml(priceCountValue, Html.FROM_HTML_MODE_COMPACT));
+        String priceCountValue = getString(R.string.total_price) + getString(R.string.colon_zh) + viewModel.getGoodsTotalPrice();
+        this.priceCount.setText(priceCountValue);
 
         this.goodsAdapter.notifyDataSetChanged();
 
@@ -269,23 +278,53 @@ public class SaleReceiptActivity extends BaseActivity implements View.OnClickLis
                 //打印小票
                 printReceipt();
                 break;
+            case R.id.scan:
+                onScanBarcode();
+                break;
             default:
                 break;
         }
     }
 
     /**
+     * 调用zxing扫描条形码
+     */
+    public void onScanBarcode() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setCaptureActivity(ScanActivity.class);  //如果不需要竖屏显示 ，忽略这个
+        integrator.setPrompt("扫描条形码");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "扫码取消！", Toast.LENGTH_LONG).show();
+            } else {
+                handlerCodeInput(result.getContents());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
      * 打印小票
      */
     private void printReceipt() {
-
+        PrinterManager.getInstance().printPosBill(PrintContent.getSaleReceipt(MyApp.getInstance(), viewModel.getGoodsList()));
     }
 
     /**
      * 收银员切换
      */
     private void showSalespersonDialog() {
-        BruceDialog.showSingleChoiceDialog(R.string.employees, SaleReceiptActivity.this, MyKeeper.getInstance().getEmployeesName(), new BruceDialog.OnChoiceItemListener() {
+        BruceDialog.showSingleChoiceDialog(R.string.employees, SaleReceiptActivity.this,
+                MyKeeper.getInstance().getEmployeesName(), new BruceDialog.OnChoiceItemListener() {
             @Override
             public void onChoiceItem(String itemName) {
                 if (!TextUtils.isEmpty(itemName)) {

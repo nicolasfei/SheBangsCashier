@@ -21,8 +21,8 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+//import com.nicolas.scannerlibrary.PPdaScanner;
+//import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.common.OperateResult;
@@ -37,7 +37,7 @@ public class StartTransferActivity extends BaseActivity implements View.OnClickL
     private EditText transferCode;
     private Button submitAll;
 
-    private Scanner scanner;                        //扫描头
+//    private Scanner scanner;                        //扫描头
     private StartTransferAdapter adapter;
 
     @Override
@@ -47,15 +47,15 @@ public class StartTransferActivity extends BaseActivity implements View.OnClickL
 
         this.viewModel = new ViewModelProvider(this).get(StartTransferViewModel.class);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerBarCodeInput(scan);
-            }
-        });
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerBarCodeInput(scan);
+//            }
+//        });
         this.acceptanceShop = findClickView(R.id.acceptanceShop);
         this.transferCode = findViewById(R.id.transferCode);
         this.transferCode.setOnEditorActionListener(new TextView.OnEditorActionListener() {

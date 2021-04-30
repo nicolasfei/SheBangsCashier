@@ -53,29 +53,29 @@ public class BarCodePrintAdapter extends BaseAdapter {
 
         BarCodeInformation info = information.get(position);
 
-        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.id + "</big></font>";
-        holder.barCode.setText(Html.fromHtml(codeValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh)  + info.id ;
+        holder.barCode.setText(codeValue);
 
-        String colorValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.color + "</big></font>";
-        holder.color.setText(Html.fromHtml(colorValue, Html.FROM_HTML_MODE_COMPACT));
+        String colorValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh)  + info.color ;
+        holder.color.setText(colorValue);
 
-        String stateValue = mContext.getString(R.string.barCodeState) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.state + "</big></font>";
-        holder.state.setText(Html.fromHtml(stateValue, Html.FROM_HTML_MODE_COMPACT));
+        String stateValue = mContext.getString(R.string.barCodeState) + mContext.getString(R.string.colon_zh)  + info.state ;
+        holder.state.setText(stateValue);
 
-        String sizeValue = mContext.getString(R.string.size) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.size + "</big></font>";
-        holder.size.setText(Html.fromHtml(sizeValue, Html.FROM_HTML_MODE_COMPACT));
+        String sizeValue = mContext.getString(R.string.size) + mContext.getString(R.string.colon_zh)  + info.size ;
+        holder.size.setText(sizeValue);
 
-        String priceValue = mContext.getString(R.string.price) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.salePrice + "</big></font>";
-        holder.price.setText(Html.fromHtml(priceValue, Html.FROM_HTML_MODE_COMPACT));
+        String priceValue = mContext.getString(R.string.price) + mContext.getString(R.string.colon_zh)  + info.salePrice ;
+        holder.price.setText(priceValue);
 
-        String sourceValue = mContext.getString(R.string.source) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.source + "</big></font>";
-        holder.source.setText(Html.fromHtml(sourceValue, Html.FROM_HTML_MODE_COMPACT));
+        String sourceValue = mContext.getString(R.string.source) + mContext.getString(R.string.colon_zh)  + info.source ;
+        holder.source.setText(sourceValue);
 
-        String inStoreTimeValue = mContext.getString(R.string.inStoreTime) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.getTime + "</big></font>";
-        holder.inStoreTime.setText(Html.fromHtml(inStoreTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String inStoreTimeValue = mContext.getString(R.string.inStoreTime) + mContext.getString(R.string.colon_zh)  + info.getTime ;
+        holder.inStoreTime.setText(inStoreTimeValue);
 
-        String printTimeValue = mContext.getString(R.string.printTime) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + info.printTime + "</big></font>";
-        holder.printTime.setText(Html.fromHtml(printTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String printTimeValue = mContext.getString(R.string.printTime) + mContext.getString(R.string.colon_zh)  + info.printTime ;
+        holder.printTime.setText(printTimeValue);
 
         holder.choice.setOnCheckedChangeListener(null);
         holder.choice.setChecked(info.isSelect);

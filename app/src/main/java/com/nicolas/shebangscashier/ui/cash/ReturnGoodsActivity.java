@@ -1,5 +1,8 @@
 package com.nicolas.shebangscashier.ui.cash;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,8 +12,10 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -20,13 +25,17 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.nicolas.printerlibraryforufovo.PrinterManager;
+import com.nicolas.scannerlibrary.CameraScanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
+import com.nicolas.shebangscashier.ScanActivity;
 import com.nicolas.shebangscashier.cashier.MyKeeper;
 import com.nicolas.shebangscashier.common.OperateResult;
 import com.nicolas.shebangscashier.common.ReturnGoodsAdapter;
+import com.nicolas.shebangscashier.ui.set.printer.PrintContent;
 import com.nicolas.toollibrary.BruceDialog;
 import com.nicolas.toollibrary.Tool;
 
@@ -35,7 +44,6 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     private ReturnGoodsViewModel viewModel;
 
     private EditText codeInput;             //条码输入
-    private Scanner scanner;                //扫描头
     private TextView user;                  //收银员
 
     private TextView vipPhone;              //会员手机
@@ -47,7 +55,7 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     private TextView numCount;              //数量合计
     private TextView refundCount;           //退款合计
 
-    private String lastCode = "";           //上一次条码输入
+    private Button goodsBack;               //退货按钮
 
     private ReturnGoodsAdapter adapter;
 
@@ -66,28 +74,9 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
         this.numCount = findViewById(R.id.numCount);
         this.refundCount = findViewById(R.id.refundCount);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerScanResultInBroadcast(scan);
-            }
-        });
-        //codeInput
+        //扫描按钮
+        findClickView(R.id.scan);
         this.codeInput = findViewById(R.id.code);
-        //按键监听方式
-        this.codeInput.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (KeyEvent.KEYCODE_ENTER == keyCode && event.getAction() == KeyEvent.ACTION_UP) {
-                    handlerScanResultInKeyListen(codeInput.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
         this.codeInput.requestFocus();
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -114,10 +103,11 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
             }
         });
 
-        findClickView(R.id.goodsBack);
+        goodsBack = findClickView(R.id.goodsBack);
 
         SwipeMenuListView listView = findViewById(R.id.listView);
         this.adapter = new ReturnGoodsAdapter(this, viewModel.getInformations());
+        listView.setAdapter(this.adapter);
         //左滑菜单
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -173,12 +163,11 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
             }
         });
 
-
         //收银员
         user = findClickView(R.id.user);
         updateUser();
 
-        //设置监听
+        //查询监听
         this.viewModel.getQueryGoodsInformationResult().observe(this, new Observer<OperateResult>() {
             @Override
             public void onChanged(OperateResult operateResult) {
@@ -193,12 +182,13 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
             }
         });
 
+        //退货监听
         this.viewModel.getReturnGoodsResult().observe(this, new Observer<OperateResult>() {
             @Override
             public void onChanged(OperateResult operateResult) {
                 dismissProgressDialog();
                 if (operateResult.getSuccess()!=null){
-                    adapter.notifyDataSetChanged();
+                    showPrintDialog();
                 }
                 if (operateResult.getError()!=null){
                     BruceDialog.showPromptDialog(ReturnGoodsActivity.this, operateResult.getError().getErrorMsg());
@@ -210,6 +200,40 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     }
 
     /**
+     * 是否打印小票对话框
+     */
+    private void showPrintDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("打印小票")
+                .setMessage("是否打印退货小票？")
+                .setNegativeButton("不打印", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        goodsBackSuccess();
+                    }
+                })
+                .setPositiveButton("打印", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PrinterManager.getInstance().printPosBill(PrintContent.getBackReceipt(ReturnGoodsActivity.this, viewModel.getInformations()));
+                        goodsBackSuccess();
+                    }
+                })
+                .setCancelable(false)
+                .create().show();
+
+    }
+
+    /**
+     * 退货成功
+     */
+    private void goodsBackSuccess(){
+        viewModel.removeAllGoods();
+        adapter.notifyDataSetChanged();
+        updateGoodsStatisticsData();
+    }
+
+    /**
      * 删除商品
      *
      * @param position position
@@ -217,8 +241,6 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     private void deleteGoods(int position) {
         showProgressDialog("删除中...");
         viewModel.removeGoods(position);
-//        adapter.notifyDataSetChanged();
-//        updateGoodsStatisticsData();
     }
 
     /**
@@ -239,7 +261,6 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
      */
     private void handlerScanResultInBroadcast(String scan) {
         codeInput.setText(scan);
-        lastCode = scan;
         queryCodeInformation(scan);
     }
 
@@ -249,15 +270,8 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
      * @param scan 扫描结果
      */
     private void handlerScanResultInKeyListen(String scan) {
-        String currCode;
-        if (!TextUtils.isEmpty(lastCode)) {
-            currCode = scan.substring(0, scan.length() - lastCode.length());
-        } else {
-            currCode = scan;
-        }
-        codeInput.setText(currCode);
-        lastCode = currCode;
-        queryCodeInformation(currCode);
+        codeInput.setText(scan);
+        queryCodeInformation(scan);
     }
 
     /**
@@ -266,7 +280,6 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
      * @param code 条码
      */
     private void handlerManualCodeInput(String code) {
-        lastCode = code;
         Tool.hideSoftInput(this);
         queryCodeInformation(code);
     }
@@ -329,6 +342,17 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     private void updateCount() {
         this.numCount.setText(("数量合计：" + viewModel.getNumCount()));
         this.refundCount.setText(("退款合计：" + viewModel.getRefundCount()));
+        if (viewModel.getNumCount() == 0) {
+            if (goodsBack.isClickable()) {
+                goodsBack.setBackground(getDrawable(R.drawable.shape_rectangle_grey));
+                goodsBack.setClickable(false);
+            }
+        } else {
+            if (!goodsBack.isClickable()) {
+                goodsBack.setBackground(getDrawable(R.drawable.shape_rectangle_red));
+                goodsBack.setClickable(true);
+            }
+        }
     }
 
     /**
@@ -356,9 +380,38 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
             case R.id.user:
                 showUserDialog();
                 break;
+            case R.id.scan:
+                onScanBarcode();
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "扫码取消！", Toast.LENGTH_LONG).show();
+            } else {
+                handlerScanResultInKeyListen(result.getContents());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 调用zxing扫描条形码
+     */
+    public void onScanBarcode() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+        integrator.setCaptureActivity(ScanActivity.class);  //如果不需要竖屏显示 ，忽略这个
+        integrator.setPrompt("扫描条形码");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.initiateScan();
     }
 
     /**
@@ -367,5 +420,10 @@ public class ReturnGoodsActivity extends BaseActivity implements View.OnClickLis
     private void returnGoods() {
         super.showProgressDialog("退货中...");
         viewModel.returnGoods();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -4,38 +4,36 @@
     <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 本地数据访问 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--wifi-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 本地数据访问 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- sd卡:android 6.0以上需要动态申请权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <!--pos自带打印机-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="smartpos.deviceservice.permission.Printer" />
     <!--蓝牙打印机-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-feature
         android:name="android.hardware.usb.host"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<!--    <uses-sdk-->
+<!--        android:minSdkVersion="18"-->
+<!--        android:targetSdkVersion="26" />-->
     <!--访问相机-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <!--杀死与指定包相关联的所有后台进程，这与内核杀死那些进程回收内存是一样的(binderDied 处理)，但这些进程如果在将来某一时刻需要使用，会重新启动-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--访问相机-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
-    <!--杀死与指定包相关联的所有后台进程，这与内核杀死那些进程回收内存是一样的(binderDied 处理)，但这些进程如果在将来某一时刻需要使用，会重新启动-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 访问相机 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 杀死与指定包相关联的所有后台进程，这与内核杀死那些进程回收内存是一样的(binderDied 处理)，但这些进程如果在将来某一时刻需要使用，会重新启动 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!--杀死与指定包相关联的所有后台进程，这与内核杀死那些进程回收内存是一样的(binderDied 处理)，但这些进程如果在将来某一时刻需要使用，会重新启动-->
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
@@ -156,7 +154,7 @@
             android:name=".ui.cash.NewGoodsSaleStatisticsActivity"
             android:label="@string/activity_new_goods_statistics"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.NewGoodsSaleStatisticsActivity" />
@@ -168,7 +166,7 @@
             android:name=".ui.cash.OldGoodsSaleStatisticsActivity"
             android:label="@string/activity_old_goods_statistics"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.NewGoodsSaleStatisticsActivity" />
@@ -181,7 +179,7 @@
             android:name=".ui.cash.ReturnGoodsActivity"
             android:label="@string/activity_return_goods"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.ReturnGoodsActivity" />
@@ -195,7 +193,7 @@
             android:name=".ui.cash.StoreReceiptActivity"
             android:label="@string/store_receipt"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.StoreReceiptActivity" />
@@ -207,7 +205,7 @@
             android:name=".ui.shopmanage.InventoryActivity"
             android:label="@string/activity_inventory"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.InventoryActivity" />
@@ -220,7 +218,7 @@
             android:name=".ui.shopmanage.InventoryGoodsActivity"
             android:label="@string/activity_inventory_goods"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.InventoryGoodsActivity" />
@@ -233,7 +231,7 @@
             android:name=".ui.shopmanage.GoodsTransferActivity"
             android:label="@string/activity_cashier_transfer_in"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.GoodsTransferActivity" />
@@ -246,7 +244,7 @@
             android:name=".ui.shopmanage.ReceiveTransferActivity"
             android:label="@string/activity_receive_transfer"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.ReceiveTransferActivity" />
@@ -259,7 +257,7 @@
             android:name=".ui.shopmanage.ReturnPrintActivity"
             android:label="@string/activity_return_print"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.ReturnPrintActivity" />
@@ -272,7 +270,7 @@
             android:name=".ui.shopmanage.QualityManagementActivity"
             android:label="@string/activity_quality_management"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.QualityManagementActivity" />
@@ -285,7 +283,7 @@
             android:name=".ui.set.printer.PrinterActivity"
             android:label="@string/activity_printer"
             android:launchMode="singleTask"
-            android:theme="@style/NormalHeight"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.PrinterActivity" />
@@ -293,6 +291,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ScanActivity"
+            android:screenOrientation="portrait" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

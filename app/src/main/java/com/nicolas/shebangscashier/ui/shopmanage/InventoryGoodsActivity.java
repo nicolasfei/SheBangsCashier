@@ -26,8 +26,8 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.nicolas.scannerlibrary.PPdaScanner;
-import com.nicolas.scannerlibrary.Scanner;
+//import com.nicolas.scannerlibrary.PPdaScanner;
+//import com.nicolas.scannerlibrary.Scanner;
 import com.nicolas.shebangscashier.BaseActivity;
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.common.OperateResult;
@@ -40,7 +40,7 @@ public class InventoryGoodsActivity extends BaseActivity implements View.OnClick
 
     private EditText codeInput;             //条码输入
     private TextView inventoryCount;        //盘点数量合计
-    private Scanner scanner;                //扫描头
+//    private Scanner scanner;                //扫描头
     private Button submit;
 
     private ArrayAdapter<String> adapter;
@@ -53,15 +53,15 @@ public class InventoryGoodsActivity extends BaseActivity implements View.OnClick
 
         this.viewModel = new ViewModelProvider(this).get(InventoryGoodsViewModel.class);
 
-        //初始化扫描头
-        scanner = new PPdaScanner(this);
-        //广播接收方式
-        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
-            @Override
-            public void scanResult(String scan) {
-                handlerScanResultInBroadcast(scan);
-            }
-        });
+//        //初始化扫描头
+//        scanner = new PPdaScanner(this);
+//        //广播接收方式
+//        scanner.setOnScannerScanResultListener(new Scanner.OnScannerScanResultListener() {
+//            @Override
+//            public void scanResult(String scan) {
+//                handlerScanResultInBroadcast(scan);
+//            }
+//        });
         //codeInput
         this.codeInput = findViewById(R.id.code);
         //按键监听方式
@@ -305,13 +305,13 @@ public class InventoryGoodsActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        scanner.scannerOpen();
+//        scanner.scannerOpen();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        scanner.scannerSuspend();
+//        scanner.scannerSuspend();
     }
 
     @Override

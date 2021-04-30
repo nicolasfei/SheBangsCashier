@@ -49,17 +49,17 @@ public class GoodsInventoryAdapter extends BaseAdapter {
 
         GoodsInventoryData s = dataList.get(position);
 
-        String value1 = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsID + "</big></font>";
-        holder.goodsId.setText(Html.fromHtml(value1, Html.FROM_HTML_MODE_COMPACT));
+        String value1 = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon)  + s.goodsID ;
+        holder.goodsId.setText(value1);
 
-        String value2 = mContext.getString(R.string.branch) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.branch + "</big></font>";
-        holder.branch.setText(Html.fromHtml(value2, Html.FROM_HTML_MODE_COMPACT));
+        String value2 = mContext.getString(R.string.branch) + mContext.getString(R.string.colon)  + s.branch ;
+        holder.branch.setText(value2);
 
-        String value3 = mContext.getString(R.string.area) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.area + "</big></font>";
-        holder.area.setText(Html.fromHtml(value3, Html.FROM_HTML_MODE_COMPACT));
+        String value3 = mContext.getString(R.string.area) + mContext.getString(R.string.colon)  + s.area ;
+        holder.area.setText(value3);
 
-        String value4 = mContext.getString(R.string.stock) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.stock + "</big></font>";
-        holder.stock.setText(Html.fromHtml(value4, Html.FROM_HTML_MODE_COMPACT));
+        String value4 = mContext.getString(R.string.stock) + mContext.getString(R.string.colon)  + s.stock ;
+        holder.stock.setText(value4);
 
         return convertView;
     }

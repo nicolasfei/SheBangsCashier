@@ -50,28 +50,28 @@ public class GoodsInformationAdapter extends BaseAdapter {
 
         final GoodsInformation goods = goodsInformation.get(position);
 
-        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.b_b_BarCode_Id + "</big></font>";
-        holder.code.setText(Html.fromHtml(codeValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeValue = mContext.getString(R.string.code) + mContext.getString(R.string.colon_zh) + goods.b_b_BarCode_Id;
+        holder.code.setText(codeValue);
 
-        String typeValue = mContext.getString(R.string.goods_type) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.goodsClassName + "</big></font>";
-        holder.type.setText(Html.fromHtml(typeValue, Html.FROM_HTML_MODE_COMPACT));
+        String typeValue = mContext.getString(R.string.goods_type) + mContext.getString(R.string.colon_zh) + goods.goodsClassName;
+        holder.type.setText(typeValue);
 
-        String numValue = mContext.getString(R.string.num) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.saleNum + "</big></font>";
-        holder.num.setText(Html.fromHtml(numValue, Html.FROM_HTML_MODE_COMPACT));
+        String numValue = mContext.getString(R.string.num) + mContext.getString(R.string.colon_zh) + goods.saleNum;
+        holder.num.setText(numValue);
 
-        String priceValue = mContext.getString(R.string.total_price) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.saleTotalPrice + "</big></font>";
-        holder.price.setText(Html.fromHtml(priceValue, Html.FROM_HTML_MODE_COMPACT));
+        String priceValue = mContext.getString(R.string.total_price) + mContext.getString(R.string.colon_zh) + goods.saleTotalPrice;
+        holder.price.setText(priceValue);
 
-        String dateValue = mContext.getString(R.string.sale_date) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.saleTime + "</big></font>";
-        holder.date.setText(Html.fromHtml(dateValue, Html.FROM_HTML_MODE_COMPACT));
+        String dateValue = mContext.getString(R.string.sale_date) + mContext.getString(R.string.colon_zh) + goods.saleTime;
+        holder.date.setText(dateValue);
 
-        String idValue = mContext.getString(R.string.receipt_id) + mContext.getString(R.string.colon_zh) + "<font color=\"black\"><big>" + goods.receiptId + "</big></font>";
-        holder.id.setText(Html.fromHtml(idValue, Html.FROM_HTML_MODE_COMPACT));
+        String idValue = mContext.getString(R.string.receipt_id) + mContext.getString(R.string.colon_zh) + goods.receiptId;
+        holder.id.setText(idValue);
 
         return convertView;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         private TextView code;
         private TextView type;
         private TextView num;
@@ -79,7 +79,7 @@ public class GoodsInformationAdapter extends BaseAdapter {
         private TextView date;
         private TextView id;
 
-        private ViewHolder(View view){
+        private ViewHolder(View view) {
             this.code = view.findViewById(R.id.code);
             this.type = view.findViewById(R.id.type);
             this.num = view.findViewById(R.id.num);

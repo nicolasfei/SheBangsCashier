@@ -20,6 +20,7 @@
             android:gravity="start|center"
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
+            android:singleLine="true"
             android:text="@string/goodsClassType"
             android:textSize="@dimen/drawer_text_size" />
 
@@ -51,6 +52,7 @@
             android:gravity="start|center"
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
+            android:singleLine="true"
             android:text="@string/sId"
             android:textSize="@dimen/drawer_text_size" />
 
@@ -83,6 +85,7 @@
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
             android:text="@string/vipPhone"
+            android:singleLine="true"
             android:textSize="@dimen/drawer_text_size" />
 
         <Button
@@ -113,6 +116,7 @@
             android:gravity="start|center"
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
+            android:singleLine="true"
             android:text="@string/goods_code"
             android:textSize="@dimen/drawer_text_size" />
 
@@ -142,6 +146,7 @@
             android:layout_weight="0.85"
             android:drawableEnd="@drawable/ic_sr_blue"
             android:gravity="start|center"
+            android:singleLine="true"
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
             android:text="@string/goodsId"
@@ -173,6 +178,7 @@
             android:layout_weight="0.85"
             android:drawableEnd="@drawable/ic_sr_blue"
             android:gravity="start|center"
+            android:singleLine="true"
             android:paddingStart="@dimen/drawer_margin"
             android:paddingEnd="0dp"
             android:text="@string/receipt"

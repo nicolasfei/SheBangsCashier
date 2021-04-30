@@ -14,10 +14,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -219,6 +225,23 @@ public class MyKeeper {
      */
     public String[] getPayment() {
         return new String[]{"支付宝", "微信", "现金", "刷卡"};
+    }
+
+    /**
+     * 获取退货期限
+     * @param date 销售日期：2020-01-02
+     * @return 退货期限：2020-01-09
+     */
+    public String getGoodsBackTerm(String date) {
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        try {
+            calendar.setTime(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).parse(date)));
+            calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + (branch.branchType.equals("加盟") ? 3 : 7));      //加盟店3天，其他为7天
+            return calendar.get(Calendar.YEAR) + "年" + (calendar.get(Calendar.MONTH) + 1) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

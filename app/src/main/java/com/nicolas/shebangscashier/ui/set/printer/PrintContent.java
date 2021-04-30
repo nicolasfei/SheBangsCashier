@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import com.nicolas.shebangscashier.R;
 import com.nicolas.shebangscashier.app.MyApp;
+import com.nicolas.shebangscashier.cashier.MyKeeper;
 import com.nicolas.shebangscashier.common.BarCodeInformation;
+import com.nicolas.shebangscashier.common.GoodsInformation;
+import com.nicolas.shebangscashier.common.ReturnGoodsInformation;
 import com.nicolas.shebangscashier.common.StoreReceipt;
 import com.nicolas.shebangscashier.ui.cash.data.SaleGoodsInformation;
 import com.nicolas.shebangscashier.ui.cash.data.SettlementGoodsInformation;
@@ -19,11 +23,14 @@ import com.printer.command.CpclCommand;
 import com.printer.command.EscCommand;
 import com.printer.command.LabelCommand;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 
 public class PrintContent {
@@ -32,6 +39,241 @@ public class PrintContent {
     public static final short PRINT_POSITION_2 = 10;
     // 将unit设置为这个单位值，其实际距离大约是一个字的1/3
     public static final short PRINT_UNIT = 7;
+
+    private static final int tabL = 6;      //制表符所占字节长度
+
+
+    public static Map<String, Object> getBackReceipt(Context context, List<ReturnGoodsInformation> informations) {
+        Map<String, Object> map = new HashMap<>();
+        int i = 0;
+        /**
+         * 打印标题
+         */
+        map.put("title", MyKeeper.getInstance().getBranch().xsName);
+        map.put("text" + i++, "\t\t\t" + context.getString(R.string.receipt_subtitle));
+        /**
+         * 小票信息
+         */
+        // 打印文字
+        map.put("text" + i++, context.getString(R.string.complaintTel) + MyKeeper.getInstance().getBranch().complaintTel + "\n");   //投诉电话
+        map.put("text" + i++, context.getString(R.string.receipt_print_time) +
+                new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(new Date()) + "\n");//打印时间
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));         //分割线
+        //打印并换行
+
+        /**
+         * 商品信息
+         */
+        int numCount=0;
+        float salePriceTotal=0;
+        String goodsT;
+        String tmp = context.getString(R.string.receipt_goods_name);       //品名
+        goodsT = tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        tmp = context.getString(R.string.receipt_goods_num);               //数量
+        goodsT += tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        goodsT += context.getString(R.string.receipt_goods_price);         //单价
+        map.put("text" + i++, goodsT);
+        for (ReturnGoodsInformation msg : informations) {
+            String goodsV;
+            String tm = msg.goodsClassName;       //品名
+            goodsV = tm + (tm.getBytes().length < tabL ? "\t\t\t" : tm.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+            tm = String.valueOf(msg.amount);      //数量
+            goodsV += (tm + (tm.getBytes().length < 4 ? "\t\t\t" : tm.getBytes().length < 4 * 2 ? "\t\t" : "\t"));
+            goodsV += "-"+msg.totalPrice;          //总价
+            map.put("text" + i++, goodsV);
+
+            numCount+=msg.amount;
+            salePriceTotal+=msg.totalPrice;
+        }
+
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+        map.put("text" + i++, (context.getString(R.string.receipt_num_total) + numCount) + "\n");   //合计数量
+        map.put("text" + i++, (context.getString(R.string.receipt_price_total) + "-"+MyApp.getInstance().getString(R.string.money) + salePriceTotal) + "\n");             //合计金额
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+
+        /**
+         * 打印二维码图片
+         */
+        Bitmap b = BitmapFactory.decodeResource(MyApp.getInstance().getResources(), R.mipmap.ewm);
+        map.put("bitmap", b);
+        //打印并走纸换行
+
+        /**
+         * 打印店铺地址
+         */
+        map.put("text" + i++, context.getString(R.string.receipt_address) + MyKeeper.getInstance().getBranch().address);
+        return map;
+    }
+
+    public static Map<String, Object> getSaleReceipt(Context context, List<GoodsInformation> informations) {
+        Map<String, Object> map = new HashMap<>();
+        int i = 0;
+        /**
+         * 打印标题
+         */
+        map.put("title", MyKeeper.getInstance().getBranch().xsName);
+        map.put("text" + i++, "\t\t\t" + context.getString(R.string.receipt_subtitle));
+        /**
+         * 小票信息
+         */
+        // 打印文字
+        map.put("text" + i++, context.getString(R.string.receipt_code) + informations.get(0).receiptId + "\n");   //小票编号
+        map.put("text" + i++, context.getString(R.string.complaintTel) + MyKeeper.getInstance().getBranch().complaintTel + "\n");   //投诉电话
+        map.put("text" + i++, context.getString(R.string.receipt_print_time) + new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(new Date()) + "\n");//打印时间
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));         //分割线
+        //打印并换行
+
+        /**
+         * 商品信息
+         */
+        int numCount=0;
+        float salePriceTotal=0;
+        String goodsT;
+        String tmp = context.getString(R.string.receipt_goods_name);       //品名
+        goodsT = tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        tmp = context.getString(R.string.receipt_goods_num);               //数量
+        goodsT += tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        goodsT += context.getString(R.string.receipt_goods_price);         //单价
+        map.put("text" + i++, goodsT);
+        for (GoodsInformation msg : informations) {
+            String goodsV;
+            String tm = msg.goodsClassName;       //品名
+            goodsV = tm + (tm.getBytes().length < tabL ? "\t\t\t" : tm.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+            tm = "x" + msg.saleNum;               //数量
+            goodsV += (tm + (tm.getBytes().length < 4 ? "\t\t\t" : tm.getBytes().length < 4 * 2 ? "\t\t" : "\t"));
+            goodsV += msg.salePrice;              //单价
+            map.put("text" + i++, goodsV);
+
+            numCount+=msg.saleNum;
+            salePriceTotal+=msg.salePrice;
+        }
+
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+        map.put("text" + i++, (context.getString(R.string.receipt_num_total) + numCount) + "\n");   //合计数量
+        map.put("text" + i++, (context.getString(R.string.receipt_price_total) + MyApp.getInstance().getString(R.string.money) + salePriceTotal) + "\n");             //合计金额
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+        /**
+         * 打印注意
+         */
+        map.put("text" + i++, context.getString(R.string.receipt_warning) + "\n");                                  //注意
+        map.put("text" + i++, "  " + context.getString(R.string.receipt_back_term) + "\n");                         //退货期限
+        map.put("text" + i++, "  " + MyKeeper.getInstance().getGoodsBackTerm(informations.get(0).saleTime) + "\n"); //退货期限
+        map.put("text" + i++, "  " + context.getString(R.string.receipt_back_condition) + "\n");  //退货条件
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition1) + "\n");         //条件1
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition2) + "\n");         //条件2
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition3) + "\n");         //条件3
+        map.put("text" + i++, "" + context.getString(R.string.receipt_back_condition4) + "\n");         //条件4
+        //打印并换行
+
+        /**
+         * 打印二维码图片
+         */
+        Bitmap b = BitmapFactory.decodeResource(MyApp.getInstance().getResources(), R.mipmap.ewm);
+        map.put("bitmap", b);
+        //打印并走纸换行
+
+        /**
+         * 打印店铺地址
+         */
+        map.put("text" + i++, context.getString(R.string.receipt_address) + MyKeeper.getInstance().getBranch().address);
+        return map;
+    }
+
+
+    public static Map<String, Object> getSaleReceipt(Context context, SettlementGoodsInformation information) {
+        Map<String, Object> map = new HashMap<>();
+        int i = 0;
+        /**
+         * 打印标题
+         */
+        map.put("title", MyKeeper.getInstance().getBranch().xsName);
+        map.put("text" + i++, "\t\t\t" + context.getString(R.string.receipt_subtitle));
+        /**
+         * 小票信息
+         */
+        // 打印文字
+        map.put("text" + i++, context.getString(R.string.receipt_code) + information.receiptCode + "\n");                              //小票编号
+        map.put("text" + i++, context.getString(R.string.complaintTel) + MyKeeper.getInstance().getBranch().complaintTel + "\n");   //投诉电话
+        map.put("text" + i++, context.getString(R.string.receipt_print_time) + new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(new Date()) + "\n");//打印时间
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));         //分割线
+        //打印并换行
+
+        /**
+         * 商品信息
+         */
+        String goodsT;
+        String tmp = context.getString(R.string.receipt_goods_name);       //品名
+        goodsT = tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        tmp = context.getString(R.string.receipt_goods_num);               //数量
+        goodsT += tmp + (tmp.getBytes().length < tabL ? "\t\t\t" : tmp.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+        goodsT += context.getString(R.string.receipt_goods_price);         //单价
+        map.put("text" + i++, goodsT);
+        for (SaleGoodsInformation msg : information.settlementList) {
+            String goodsV;
+            String tm = msg.goodsClassName;       //品名
+            goodsV = tm + (tm.getBytes().length < tabL ? "\t\t\t" : tm.getBytes().length < tabL * 2 ? "\t\t" : "\t");
+            tm = "x" + msg.amount;               //数量
+            goodsV += (tm + (tm.getBytes().length < 4 ? "\t\t\t" : tm.getBytes().length < 4 * 2 ? "\t\t" : "\t"));
+            goodsV += msg.price;                  //单价
+            map.put("text" + i++, goodsV);
+        }
+
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+        map.put("text" + i++, (context.getString(R.string.receipt_num_total) + information.settlementList.size()) + "\n");   //合计数量
+        map.put("text" + i++, (context.getString(R.string.receipt_price_total) + MyApp.getInstance().getString(R.string.money) + information.saleTotal) + "\n");             //合计金额
+        map.put("text" + i++, (context.getString(R.string.receipt_Collection) + MyApp.getInstance().getString(R.string.money) + information.actualPayment) + "\n");          //收款
+        map.put("text" + i++, (context.getString(R.string.receipt_give_change) + MyApp.getInstance().getString(R.string.money) + information.change) + "\n");                //找零
+        map.put("text" + i++, context.getString(R.string.receipt_print_division));                    //分割线
+        //打印并换行
+        /**
+         * 会员信息
+         */
+        if (information.vip != null) {
+            map.put("text" + i++, (context.getString(R.string.receipt_vip_tel) + information.vip.tel) + "\n");                              //会员手机号码
+            map.put("text" + i++, (context.getString(R.string.receipt_sale_integral) + (int) information.saleTotal) + "\n");                //本次积分
+            map.put("text" + i++, (context.getString(R.string.receipt_consume_integral) + information.useIntegral) + "\n");                 //消费积分
+            map.put("text" + i++, (context.getString(R.string.receipt_offset_cash) + information.useIntegral / 100 * 5) + "\n");            //抵扣现金
+            map.put("text" + i++, (context.getString(R.string.receipt_surplus_integral) + (information.vip.integral - information.useIntegral)) + "\n");    //剩余积分
+        } else {
+            map.put("text" + i++, context.getString(R.string.receipt_vip_tel) + "\n");              //会员手机号码
+            map.put("text" + i++, context.getString(R.string.receipt_sale_integral) + "\n");        //本次积分
+            map.put("text" + i++, context.getString(R.string.receipt_consume_integral) + "\n");     //消费积分
+            map.put("text" + i++, context.getString(R.string.receipt_offset_cash) + "\n");          //抵扣现金
+            map.put("text" + i++, context.getString(R.string.receipt_surplus_integral) + "\n");     //剩余积分
+        }
+        map.put("line", context.getString(R.string.receipt_print_division));                        //分割线
+        //打印并换行
+        /**
+         * 打印注意
+         */
+        map.put("text" + i++, context.getString(R.string.receipt_warning) + "\n");                                  //注意
+        map.put("text" + i++, "  " + context.getString(R.string.receipt_back_term) + "\n");                         //退货期限
+        map.put("text" + i++, "  " + MyKeeper.getInstance().getGoodsBackTerm(new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA).format(new Date()))+ "\n");                                //退货期限
+        map.put("text" + i++, "  " + context.getString(R.string.receipt_back_condition) + "\n");            //退货条件
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition1) + "\n");         //条件1
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition2) + "\n");         //条件2
+        map.put("text" + i++, "    " + context.getString(R.string.receipt_back_condition3) + "\n");         //条件3
+        map.put("text" + i++, "" + context.getString(R.string.receipt_back_condition4) + "\n");         //条件4
+        //打印并换行
+
+        /**
+         * 打印二维码图片
+         */
+        Bitmap b = BitmapFactory.decodeResource(MyApp.getInstance().getResources(), R.mipmap.ewm);
+        map.put("bitmap", b);
+        //打印并走纸换行
+
+        /**
+         * 打印店铺地址
+         */
+        map.put("text" + i++, context.getString(R.string.receipt_address) + MyKeeper.getInstance().getBranch().address);
+        return map;
+    }
 
     /**
      * 收银小票
@@ -66,8 +308,8 @@ public class PrintContent {
         esc.addSelectJustification(EscCommand.JUSTIFICATION.LEFT);
         // 打印文字
         esc.addText(context.getString(R.string.receipt_code) + information.receiptCode + "\n");                                       //小票编号
-//        esc.addText(context.getString(R.string.receipt_complaints_hotline) + BranchKeeper.getInstance().information.dzTel + "\n");                  //投诉电话
-//        esc.addText(context.getString(R.string.receipt_guider) + BranchKeeper.getInstance().onDutyGuide.guideName + "\n");              //导购员
+//         esc.addText(context.getString(R.string.receipt_complaints_hotline) + BranchKeeper.getInstance().information.dzTel + "\n");                  //投诉电话
+//         esc.addText(context.getString(R.string.receipt_guider) + BranchKeeper.getInstance().onDutyGuide.guideName + "\n");              //导购员
         esc.addText(context.getString(R.string.receipt_print_time) + new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(new Date()) + "\n");//打印时间
         esc.addText(context.getString(R.string.receipt_print_division));         //分割线
         //打印并换行
@@ -156,7 +398,7 @@ public class PrintContent {
         esc.addSelectJustification(EscCommand.JUSTIFICATION.LEFT);
         //打印fontB文字字体
         esc.addSelectCharacterFont(EscCommand.FONT.FONTB);
-//        esc.addText(context.getString(R.string.receipt_address) + BranchKeeper.getInstance().information.address);
+//         esc.addText(context.getString(R.string.receipt_address) + BranchKeeper.getInstance().information.address);
         //打印并换行
         esc.addPrintAndLineFeed();
         //打印走纸n个单位
@@ -501,7 +743,7 @@ public class PrintContent {
             /* 设置原点坐标 */
             tsc.addReference(0, 0);
             //订单条码
-            tsc.add1DBarcode(RowStartOffset, RowHeight / 3, LabelCommand.BARCODETYPE.CODE128, 60,
+            tsc.add1DBarcode(RowStartOffset, RowHeight / 3, LabelCommand.BARCODETYPE.CODE93, 60,
                     LabelCommand.READABEL.EANBEL, LabelCommand.ROTATION.ROTATION_0, receipt.id);
             contentStartY += 100;
             //---------------------------第二行-------------------------//

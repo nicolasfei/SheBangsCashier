@@ -53,6 +53,8 @@ public class SettlementViewModel extends ViewModel {
     private MutableLiveData<OperateResult> exchangeIntegralResult;    //积分兑换结果
     private MutableLiveData<OperateResult> actualPaymentResult;       //实付结果
 
+    private boolean isSetActualPayment = false;
+
     private String currentSaleVipTel;           //当前售卖对象的手机号码
 
     public SettlementViewModel() {
@@ -61,6 +63,7 @@ public class SettlementViewModel extends ViewModel {
         settlementChangeResult = new MutableLiveData<>();
         exchangeIntegralResult = new MutableLiveData<>();
         actualPaymentResult = new MutableLiveData<>();
+        payType = MyKeeper.getInstance().getPayment()[2];       //默认现金支付
     }
 
     public LiveData<OperateResult> getSettlementResult() {
@@ -83,6 +86,10 @@ public class SettlementViewModel extends ViewModel {
         return exchangeIntegralResult;
     }
 
+    public String getSaleVoucher() {
+        return goodsInformationList.get(0).id;
+    }
+
     /**
      * 获取找零金额
      *
@@ -102,17 +109,26 @@ public class SettlementViewModel extends ViewModel {
     }
 
     /**
+     * 是否已经设置了实付金额
+     *
+     * @return yes/no
+     */
+    public boolean isSetActualPayment() {
+        return isSetActualPayment;
+    }
+
+    /**
      * 设置实付金额
      *
      * @param actualPayment 实付金额
      */
     public void setActualPayment(float actualPayment) {
-
         if ((actualPayment + (float) (this.useIntegral / 100 * 5)) < this.saleTotal) {
             actualPaymentResult.setValue(new OperateResult(new OperateError(-1, (MyApp.getInstance().getString(R.string.settlement_actualPayment_error)), null)));
         } else {
             this.actualPayment = actualPayment;
             this.change = this.actualPayment + this.useIntegralDeduction - this.saleTotal;
+            isSetActualPayment = true;
             actualPaymentResult.setValue(new OperateResult(new OperateInUserView(null)));
         }
     }
@@ -194,7 +210,7 @@ public class SettlementViewModel extends ViewModel {
             SettlementGoodsMsg settleGoods = new SettlementGoodsMsg(goods.goodsClassName + "(" + goods.id + ")",
                     String.valueOf(goods.amount), new DecimalFormat("###.00").format(goods.price));
             numCount += goods.amount;
-            priceCount += goods.price;
+            priceCount += goods.amount * goods.price;
             goodsMsgs.add(settleGoods);
         }
         SettlementGoodsMsg total = new SettlementGoodsMsg("合计", String.valueOf(numCount), new DecimalFormat("###.00").format(priceCount));
@@ -203,6 +219,15 @@ public class SettlementViewModel extends ViewModel {
         SettlementGroupMsg groupMsg = new SettlementGroupMsg(head, total, goodsMsgs);
         settlementGroup.add(groupMsg);
         settlementChangeResult.setValue(new OperateResult(new OperateInUserView(null)));
+    }
+
+    /**
+     * 获取应付金额
+     *
+     * @return 应付金额
+     */
+    public float getSaleTotal() {
+        return saleTotal;
     }
 
     /**
@@ -316,5 +341,14 @@ public class SettlementViewModel extends ViewModel {
         bundle.putString("receiptCode", receiptCode);
         bundle.putParcelableArrayList("sale", goodsInformationList);
         return bundle;
+    }
+
+    /**
+     * 获取支付方式
+     *
+     * @return 支付方式
+     */
+    public String getPayType() {
+        return payType;
     }
 }

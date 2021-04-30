@@ -110,7 +110,6 @@ public class ReturnGoodsViewModel extends ViewModel {
 
     /**
      * 查询积分抵扣金额
-     *
      */
     public void queryIntegralActivityBack() {
         CommandVo vo = new CommandVo();
@@ -119,7 +118,7 @@ public class ReturnGoodsViewModel extends ViewModel {
         vo.contentType = HttpHandler.ContentType_APP;
         vo.requestMode = HttpHandler.RequestMode_POST;
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("integral", String.valueOf(deductIntegral));
+        parameters.put("integral", String.valueOf(integralBalance));
         vo.parameters = parameters;
         Invoker.getInstance().setOnEchoResultCallback(this.callback);
         Invoker.getInstance().exec(vo);
@@ -133,12 +132,12 @@ public class ReturnGoodsViewModel extends ViewModel {
         CommandVo vo = new CommandVo();
         vo.typeEnum = CommandTypeEnum.COMMAND_SALE;
         vo.url = SaleInterface.BarCodeBack;
-        vo.contentType = HttpHandler.ContentType_APP;
+        vo.contentType = HttpHandler.ContentType_JSON;
         vo.requestMode = HttpHandler.RequestMode_POST;
         Map<String, String> parameters = new HashMap<>();
         JSONArray array = new JSONArray();
         for (ReturnGoodsInformation item : returnGoods) {
-            array.put(item.getJsonString());
+            array.put(item.getJson());
         }
         parameters.put("myJson", array.toString());
         vo.parameters = parameters;
@@ -156,8 +155,10 @@ public class ReturnGoodsViewModel extends ViewModel {
                 case SaleInterface.BarCodeBackById:         //条码查询
                     if (result.success) {
                         ReturnGoodsInformation item = new ReturnGoodsInformation(result.data);
-                        if (!TextUtils.isEmpty(vipPhone) && !item.memberTel.equals(vipPhone)) {
-                            queryGoodsInformationResult.setValue(new OperateResult(new OperateError(-1, "非当前会员所购买服饰", null)));
+                        if ((TextUtils.isEmpty(vipPhone) && returnGoods.size() > 0 && !TextUtils.isEmpty(item.memberTel)) ||
+                                (!TextUtils.isEmpty(vipPhone) && !item.memberTel.equals(vipPhone))) {
+                            queryGoodsInformationResult.setValue(new OperateResult(new OperateError(-1,
+                                    "非当前会员所购买服饰，请先结算", null)));
                             return;
                         }
                         if (TextUtils.isEmpty(vipPhone)) {
@@ -166,10 +167,13 @@ public class ReturnGoodsViewModel extends ViewModel {
                         vipIntegral = item.balanceIntegral;         //会员积分
                         deductIntegral += item.deductionIntegral;       //扣除积分
                         integralBalance = vipIntegral - deductIntegral;     //积分差额=会员积分-总的扣除积分
-                        refundDeduction += item.deductionIntegral;
+//                        refundDeduction += item.deductionIntegral;
                         returnGoods.add(item);
-//                        queryGoodsInformationResult.setValue(new OperateResult(new OperateInUserView(null)));
-                        queryIntegralActivityBack();
+                        if (integralBalance < 0) {
+                            queryIntegralActivityBack();        //积分不够的情况下，查询需要补多少钱
+                        } else {
+                            queryGoodsInformationResult.setValue(new OperateResult(new OperateInUserView(null)));
+                        }
                     } else {
                         queryGoodsInformationResult.setValue(new OperateResult(new OperateError(result.code, result.msg, null)));
                     }
@@ -179,18 +183,15 @@ public class ReturnGoodsViewModel extends ViewModel {
                         refundDeduction = Float.parseFloat(result.data); //退款减扣=积分差额所抵扣的钱
                         queryGoodsInformationResult.setValue(new OperateResult(new OperateInUserView(null)));
                     } else {
+                        if (returnGoods.size() > 0) {
+                            returnGoods.remove(returnGoods.size() - 1);
+                        }
                         queryGoodsInformationResult.setValue(new OperateResult(new OperateError(result.code, result.msg, null)));
                     }
                     break;
                 case SaleInterface.BarCodeBack:             //退货
                     if (result.success) {
                         //清空returnGoods list
-                        returnGoods.clear();
-                        vipPhone = "";
-                        vipIntegral = 0;
-                        deductIntegral = 0;
-                        integralBalance = 0;
-                        refundDeduction = 0;
                         returnGoodsResult.setValue(new OperateResult(new OperateInUserView(null)));
                     } else {
                         returnGoodsResult.setValue(new OperateResult(new OperateError(result.code, result.msg, null)));
@@ -237,5 +238,14 @@ public class ReturnGoodsViewModel extends ViewModel {
         refundDeduction -= item.deductionIntegral;
         returnGoods.remove(position);
         queryIntegralActivityBack();
+    }
+
+    public void removeAllGoods() {
+        returnGoods.clear();
+        vipPhone = "";
+        vipIntegral = 0;
+        deductIntegral = 0;
+        integralBalance = 0;
+        refundDeduction = 0;
     }
 }

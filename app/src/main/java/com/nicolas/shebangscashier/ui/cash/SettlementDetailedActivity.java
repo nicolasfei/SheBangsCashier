@@ -2,6 +2,7 @@ package com.nicolas.shebangscashier.ui.cash;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,6 +32,7 @@ public class SettlementDetailedActivity extends MyActivity {
 
     private SettlementDetailedViewModel detailedViewModel;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +49,20 @@ public class SettlementDetailedActivity extends MyActivity {
         //分店信息
         TextView branch = findViewById(R.id.branch);
         String branchValue = getString(R.string.branch) + "\u3000\u3000\u3000\u3000" +
-                "<font color=\"black\"><big>" + MyKeeper.getInstance().getBranch().name + "</big></font>";
-        branch.setText(Html.fromHtml(branchValue, Html.FROM_HTML_MODE_COMPACT));
+                MyKeeper.getInstance().getBranch().name;
+        branch.setText(branchValue);
 
         //收银员
         TextView cashier = findViewById(R.id.cashier);
         String cashierValue = getString(R.string.cashier) + "\u3000\u3000\u3000" +
-                "<font color=\"black\"><big>" + MyKeeper.getInstance().getStaff().name + "</big></font>";
-        cashier.setText(Html.fromHtml(cashierValue, Html.FROM_HTML_MODE_COMPACT));
+                MyKeeper.getInstance().getStaff().name;
+        cashier.setText(cashierValue);
 
         //合计
         TextView total = findViewById(R.id.total);
         String totalValue = getString(R.string.total) + MyApp.getInstance().getString(R.string.colon) + detailedViewModel.goodsInformationList.size() + "\u3000" +
-                "<font color=\"#FF5722\">" + getString(R.string.total_price) + MyApp.getInstance().getString(R.string.colon) + detailedViewModel.totalCast + "</font>";
-        total.setText(Html.fromHtml(totalValue, Html.FROM_HTML_MODE_COMPACT));
+                getString(R.string.total_price) + MyApp.getInstance().getString(R.string.colon) + detailedViewModel.totalCast;
+        total.setText(totalValue);
 
         //商品list
         SwipeMenuListView saleList = findViewById(R.id.sale_list_view);
@@ -74,20 +77,20 @@ public class SettlementDetailedActivity extends MyActivity {
         TextView residualIntegral = findViewById(R.id.residualIntegral);
         if (vip != null) {
             String vipNameS = getString(R.string.vip) + "\u3000\u3000\u3000\u3000" +
-                    "<font color=\"black\">" + vip.name + "</font>";
-            vipName.setText(Html.fromHtml(vipNameS, Html.FROM_HTML_MODE_COMPACT));
+                    vip.name;
+            vipName.setText(vipNameS);
 
             String thisIntegralS = getString(R.string.this_integral) + "\t\t\t\t" +
-                    "<font color=\"black\">" + detailedViewModel.saleIntegral + "</font>";
-            thisIntegral.setText(Html.fromHtml(thisIntegralS, Html.FROM_HTML_MODE_COMPACT));
+                    detailedViewModel.saleIntegral;
+            thisIntegral.setText(thisIntegralS);
 
             String consumeIntegralS = getString(R.string.consume_integral) + "\t\t\t\t" +
-                    "<font color=\"black\">" + detailedViewModel.useIntegral + "</font>";
-            consumeIntegral.setText(Html.fromHtml(consumeIntegralS, Html.FROM_HTML_MODE_COMPACT));
+                    detailedViewModel.useIntegral;
+            consumeIntegral.setText(consumeIntegralS);
 
             String residualIntegralS = getString(R.string.residual_integral) + "\t\t\t\t" +
-                    "<font color=\"black\">" + detailedViewModel.surplusIntegral + "</font>";
-            residualIntegral.setText(Html.fromHtml(residualIntegralS, Html.FROM_HTML_MODE_COMPACT));
+                    detailedViewModel.surplusIntegral;
+            residualIntegral.setText(residualIntegralS);
         } else {
             vipName.setText(getString(R.string.vip));
             thisIntegral.setText(getString(R.string.this_integral));
@@ -98,26 +101,26 @@ public class SettlementDetailedActivity extends MyActivity {
         //收款金额
         TextView collection = findViewById(R.id.cash1);
         String collectionS = getString(R.string.collection) + "\u3000\u3000" +
-                "<font color=\"black\">" + getString(R.string.money) + detailedViewModel.collection + "</font>" + "\u3000\u3000\u3000" +
+                getString(R.string.money) + detailedViewModel.collection + "\u3000\u3000\u3000" +
                 //积分抵扣
                 getString(R.string.deduction) + "\u3000\u3000" +
-                "<font color=\"blue\">" + getString(R.string.money) + detailedViewModel.deduction + "</font>";
-        collection.setText(Html.fromHtml(collectionS, Html.FROM_HTML_MODE_COMPACT));
+                getString(R.string.money) + detailedViewModel.deduction;
+        collection.setText(collectionS);
 
         //应收金额
         TextView receivable = findViewById(R.id.cash2);
         String receivableS = getString(R.string.receivable) + "\u3000\u3000" +
-                "<font color=\"#FF5722\">" + getString(R.string.money) + detailedViewModel.receivable + "</font>";
-        receivable.setText(Html.fromHtml(receivableS, Html.FROM_HTML_MODE_COMPACT));
+                getString(R.string.money) + detailedViewModel.receivable;
+        receivable.setText(receivableS);
 
         //收款合计
         TextView totalCash = findViewById(R.id.cash3);
         String totalS = getString(R.string.total_cash) + "\u3000\u3000" +
-                "<font color=\"black\">" + getString(R.string.money) + detailedViewModel.collection + "</font>" + "\u3000\u3000\u3000" +
+                getString(R.string.money) + detailedViewModel.collection + "\u3000\u3000\u3000" +
                 //找零
-                getString(R.string.settlement_text_change) + "\u3000\u3000\u3000\u3000\u3000" +
-                "<font color=\"red\">" + getString(R.string.money) + detailedViewModel.change + "</font>";
-        total.setText(Html.fromHtml(totalS, Html.FROM_HTML_MODE_COMPACT));
+                getString(R.string.settlement_text_change) + "\u3000\u3000\u3000\u3000" +
+                getString(R.string.money) + detailedViewModel.change;
+        totalCash.setText(totalS);
 
         Button print = findViewById(R.id.print);
         print.setOnClickListener(new View.OnClickListener() {

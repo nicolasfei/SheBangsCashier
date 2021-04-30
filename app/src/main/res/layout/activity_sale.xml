@@ -41,7 +41,7 @@
                 style="@style/fragment_cashier_text_style"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="0.6"
                 android:background="@null"
                 android:drawableStart="@drawable/ic_scanning"
                 android:drawablePadding="@dimen/drawable_to_text_margin"
@@ -50,10 +50,18 @@
                 android:inputType="text" />
 
             <Button
+                android:id="@+id/scan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:background="@drawable/shape_translucent_blue"
+                android:text="@string/scan" />
+
+            <Button
                 android:id="@+id/oldSale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.25"
                 android:background="@drawable/shape_translucent_blue"
                 android:text="@string/old_sale" />
         </LinearLayout>

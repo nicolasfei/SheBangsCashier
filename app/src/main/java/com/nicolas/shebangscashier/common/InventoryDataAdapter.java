@@ -59,38 +59,38 @@ public class InventoryDataAdapter extends BaseAdapter {
             ImageLoadClass.getInstance().displayImage(s.img, holder.photo, true);
         }
 
-        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.fId + "</big></font>";
-        holder.shop.setText(Html.fromHtml(shopValue, Html.FROM_HTML_MODE_COMPACT));
+        String shopValue = mContext.getString(R.string.shop) + mContext.getString(R.string.colon)  + s.fId ;
+        holder.shop.setText(shopValue);
 
-        String sIdValue = mContext.getString(R.string.sId1) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.sId + "</big></font>";
-        holder.sId.setText(Html.fromHtml(sIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String sIdValue = mContext.getString(R.string.sId1) + mContext.getString(R.string.colon)  + s.sId ;
+        holder.sId.setText(sIdValue);
 
-        String getTimeValue = mContext.getString(R.string.getTime) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.getTime + "</big></font>";
-        holder.getTime.setText(Html.fromHtml(getTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String getTimeValue = mContext.getString(R.string.getTime) + mContext.getString(R.string.colon)  + s.getTime ;
+        holder.getTime.setText(getTimeValue);
 
-        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.seasonName + "</big></font>";
-        holder.season.setText(Html.fromHtml(seasonNameValue, Html.FROM_HTML_MODE_COMPACT));
+        String seasonNameValue = mContext.getString(R.string.seasonName) + mContext.getString(R.string.colon)  + s.seasonName ;
+        holder.season.setText(seasonNameValue);
 
-        String priceValue = mContext.getString(R.string.salePrice) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.salePrice + "</big></font>";
-        holder.price.setText(Html.fromHtml(priceValue, Html.FROM_HTML_MODE_COMPACT));
+        String priceValue = mContext.getString(R.string.salePrice) + mContext.getString(R.string.colon)  + s.salePrice ;
+        holder.price.setText(priceValue);
 
-        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsId + "</big></font>";
-        holder.newGoods.setText(Html.fromHtml(goodsIdValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsIdValue = mContext.getString(R.string.goodsId) + mContext.getString(R.string.colon)  + s.goodsId ;
+        holder.newGoods.setText(goodsIdValue);
 
-        String isInventoryValue = mContext.getString(R.string.isInventory) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.pd + "</big></font>";
-        holder.isInventory.setText(Html.fromHtml(isInventoryValue, Html.FROM_HTML_MODE_COMPACT));
+        String isInventoryValue = mContext.getString(R.string.isInventory) + mContext.getString(R.string.colon)  + s.pd ;
+        holder.isInventory.setText(isInventoryValue);
 
-        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.goodsClassName + "</big></font>";
-        holder.type.setText(Html.fromHtml(goodsClassValue, Html.FROM_HTML_MODE_COMPACT));
+        String goodsClassValue = mContext.getString(R.string.goodsClass) + mContext.getString(R.string.colon)  + s.goodsClassName ;
+        holder.type.setText(goodsClassValue);
 
-        String pdTimeValue = mContext.getString(R.string.pdTime) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.pdTime + "</big></font>";
-        holder.pdTime.setText(Html.fromHtml(pdTimeValue, Html.FROM_HTML_MODE_COMPACT));
+        String pdTimeValue = mContext.getString(R.string.pdTime) + mContext.getString(R.string.colon)  + s.pdTime ;
+        holder.pdTime.setText(pdTimeValue);
 
-        String sourceValue = mContext.getString(R.string.source) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.source + "</big></font>";
-        holder.source.setText(Html.fromHtml(sourceValue, Html.FROM_HTML_MODE_COMPACT));
+        String sourceValue = mContext.getString(R.string.source) + mContext.getString(R.string.colon)  + s.source ;
+        holder.source.setText(sourceValue);
 
-        String codeStatusValue = mContext.getString(R.string.codeStatus) + mContext.getString(R.string.colon) + "<font color=\"black\"><big>" + s.state + "</big></font>";
-        holder.codeStatus.setText(Html.fromHtml(codeStatusValue, Html.FROM_HTML_MODE_COMPACT));
+        String codeStatusValue = mContext.getString(R.string.codeStatus) + mContext.getString(R.string.colon)  + s.state ;
+        holder.codeStatus.setText(codeStatusValue);
 
         return convertView;
     }

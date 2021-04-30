@@ -114,7 +114,7 @@
     <string name="settlement_pay_case">付款方式</string>
     <string name="settlement_settlement_cash">结算收银</string>
     <string name="settlement_text_payment">实付:</string>
-    <string name="settlement_text_change">找零:</string>
+    <string name="settlement_text_change">找零</string>
     <string name="settlement_text_bill">账单明细</string>
     <string name="input_settlement_cash">请输入结算金额</string>
     <string name="input_exchange_integral">请输入兑换积分</string>
@@ -149,7 +149,8 @@
     <string name="receipt_back_condition">★退换货须同时具备以下条件：</string>
     <string name="receipt_back_condition1">●出示购买时的收银小票</string>
     <string name="receipt_back_condition2">●所退还商品不影响再次销售</string>
-    <string name="receipt_back_condition3">●所退换商品未经穿着、未见水、未弄脏、无损坏、吊牌未摘除</string>
+    <string name="receipt_back_condition3">●所退换商品未经穿着、未见</string>
+    <string name="receipt_back_condition4">水、未弄脏、无损坏、吊牌未摘除</string>
     <string name="receipt_address">地址：</string>
     <string name="receipt_print_division">--------------------------------\n</string>
     <!--other-->
@@ -224,7 +225,7 @@
     <string name="seasonName">季节装</string>
     <string name="goodsClass">类型</string>
     <string name="goodsId">新货号</string>
-    <string name="sId">供应商编号</string>
+    <string name="sId">供应商</string>
     <string name="sIdHid">编号</string>
     <string name="amount">库存</string>
     <string name="salePrice">售价</string>
@@ -331,4 +332,5 @@
     <string name="remark">补充描述</string>
     <string name="nav_quality_managemeng">质检管理</string>
     <string name="failed">失败</string>
+    <string name="complaintTel">投诉电话：</string>
 </resources>
